@@ -1,0 +1,55 @@
+
+
+      <section class="about_section layout_padding">
+    <div class="container  ">
+
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="images/about-img.png" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                LOG IN
+              </h2>
+            </div>
+           
+            <form action="/login" method="post"  id="login-form">
+             <div class="form-outline mb-4">
+             <label class="form-label" for="form1Example13">Email address</label>
+            <input type="email" id="form1Example13" name="Email" class="form-control form-control-lg" required />
+          </div>
+
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form1Example23">Password</label>
+            <input type="password" id="form1Example23" name="Password" class="form-control form-control-lg" required />
+          </div>
+
+           <div class="d-flex justify-content-around align-items-center mb-4">
+            <!-- Checkbox -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="form1Example3" />
+              <label class="form-check-label" for="form1Example3"> Remember me </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
+
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+          </div>
+
+          
+          <p class="text-center text-muted mt-5 mb-0">Create New Account? <a href="/signup"
+                    class="fw-bold text-body"><u>Sign Up</u></a></p> 
+          
+
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>

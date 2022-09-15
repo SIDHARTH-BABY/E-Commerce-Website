@@ -1,0 +1,36 @@
+<div class="content">
+<section>
+    <div class="container"> 
+        
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">email</th>
+                    <th scope="col">Number</th>
+
+                   
+                   
+                </tr>
+            </thead>
+            <tbody>
+                {{#each userdetails}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{this.Name}} </td>
+                    <td>{{this.Email}} </td>
+                     <td>{{this.phone}} </td>
+                    <td>{{this.block}}</td>
+           
+                    <td ><a href="/admin/user-active/{{this._id}}" class="btn btn-success mt-5">active</a></td> 
+                     <td><a href="/admin/user-block/{{this._id}} " class="btn btn-danger mt-5">block</a></td>
+
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</section>
+</div>

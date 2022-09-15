@@ -1,0 +1,37 @@
+<div class="content">
+<section>
+    <div class="container  d-flex justify-content-center"> 
+        <div class="float-right">
+            
+        </div>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col ">Number</th>
+                    <th scope="col">Category</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {{#each category}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{this.category}} </td>
+                   
+                     <td><a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure want to delete {{this.Name}} ?')">Delete</a></td>
+                      
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+       
+    </div>
+
+    
+
+    
+
+</section>
+
+</div>

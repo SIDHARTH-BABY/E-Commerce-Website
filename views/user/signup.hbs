@@ -1,0 +1,94 @@
+
+
+
+    <section class="about_section layout_padding ">
+    <div class="container  ">
+
+      <div class="row mx-5 row d-flex justify-content-center">
+        {{!-- <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="https://tse1.mm.bing.net/th?id=OIP.qIBkr1Z7bnchJYjkrk1j2QHaEw&pid=Api&P=0" alt="">
+          </div>
+        </div> --}}
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                SIGN UP
+              </h2>
+            </div>
+
+             {{#if signUpErr}}              
+               {{signUpErr}}
+             {{/if}}
+
+           
+          
+            <form action="/signup" method="post" class="mx-1 mx-md-4 mt-5" id="signup-form">
+
+             <div class="form-outline mb-4">                  
+            <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example1c">Your Name</label>
+                      <input type="text" id="form3Example1c" name="Name" class="form-control" required />
+                    </div>
+                  </div>
+
+
+                  <div class="form-outline mb-4"> 
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example3c">Your Email</label>
+                      <input type="email" id="form3Example3c" name="Email" class="form-control" required />                     
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                      <label class="form-label" for="form3Example4c">Password</label>
+                      <input type="password" id="form3Example4c" name="Password" class="form-control" required />      
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                       <label class="form-label" for="form3Example4cd">Confirm password</label>
+                      <input type="password" id="form3Example4cd" name="Password2" class="form-control" required />
+                     
+                    </div>
+                  </div>
+
+                   <div class="form-outline mb-4">
+                    <div class="form-outline flex-fill mb-0">
+                       <label class="form-label" for="form3Example4cd">mobile number</label>
+                      <input type="pel" id="form3Example4cd" name="phone" class="form-control" required />
+                     
+                    </div>
+                  </div>
+
+ 
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Sign Up</button>
+
+          
+
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+          </div>
+
+          <p class="text-center text-muted mt-5 mb-0"><a href="/login"
+                    class="fw-bold text-body"><u>log in</u></a></p> 
+
+          
+
+          
+
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
