@@ -1,75 +1,60 @@
  <section class="about_section layout_padding ">
-    <div class="container  ">
+    <div class="container">
+
+      {{#with products}}
 
       <div class="row mx-5 row d-flex justify-content-center">
 
-        <div >
-
-               <td><img src="/product-images/{{this.productId}}.png" style="width: 250px; height: 250px;"></td>
-
-
-            </div>
-       
-        <div class="col-md-6 ">
-          <div class="detail-box pl-5">
-
-
-            
-
-
-              <div>
-           
-
-  <h3 class="card-header">{{this.name}}</h3>
-  
-
-   
-  
-    <h5 class="card-title">{{this._id}}</h5>
- 
-
-      <p>
-       {{this.description}}
-      </p>
-
-      <p>
-       "Suspendisse in rutrum elit, eget lacinia purus. Cras nisi magna, lacinia ut eros quis, molestie auctor tortor. Aenean congue tincidunt erat, nec aliquam massa convallis a. Cras ex elit, porttitor et semper at, ullamcorper in urna. Mauris convallis quis sapien sed placerat. Sed commodo felis id aliquam ornare. Praesent convallis eget leo vel volutpat. Suspendisse id ipsum ut odio porttitor malesuada. Praesent non nibh id libero pharetra efficitur eu nec sapien. Nullam hendrerit convallis finibus. Praesent convallis, augue ac ultrices tristique, augue risus viverra odio, non facilisis dolor metus et massa.
-        Mauris blandit dapibus ex sit amet commodo. Vestibulum varius sapien at est vehicula faucibus"
-      </p>
-
-
-     
-      <div class="options">
-      <h6>
-      ₹{{this.price}}
-      </h6>
-
-      <h6>
-     Home Delivery Available
-      </h6>
-
-    <a href="#" class="btn btn-primary">Buy Now</a>
-
-     <a href="#" class="btn btn-primary">Add to cart</a>
-  
-
-           
       
-        </div>
+ <div class="container  mb-5 ">
+    <div class="row d-flex justify-content-center ">
+        <div class="col-md-10">
+            <div class="card bg-dark ">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="images p-3">
+                            <div class="text-center p-4"> <img id="main-image" src="/product-images/{{this._id}}.png" width="250" /> </div>
+                            {{!-- <div class="thumbnail text-center"> <img onclick="change_image(this)" src="https://i.imgur.com/Rx7uKd0.jpg" width="70"> <img onclick="change_image(this)" src="https://i.imgur.com/Dhebu4F.jpg" width="70"> </div> --}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4">
+                           
+                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{this.Category}}</span>
+                                 <h3 class="card-header">{{this.name}}</h3>
+                            </div>
+                            <p class="about mdb-color white-text"> {{this.description}}</p>
 
-        </div>
+                            <h6>
+                             ₹{{this.price}}
+                             </h6>
+                             <h6>
+                           Home Delivery Available
+                                  </h6>
+                            {{!-- <div class="sizes mt-5">
+                                <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
+                            </div> --}}
+                             <div class="options">
+                               <a href="#" class="btn btn-primary">Buy Now</a>
 
-    
-      </div>
+                             </div>
+                            <div class="cart mt-4 align-items-center"> <button class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
+</div>
+
+
+</div>
+ {{/with}}
+
+
+   </div>
 
   </section>
-
-
-
-
 
 
   

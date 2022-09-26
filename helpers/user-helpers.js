@@ -3,6 +3,7 @@ const collections = require('../config/collections')
 const bcrypt=require('bcrypt')
 const { response } = require('express')
 
+
 let objectId = require('mongodb').ObjectId
 
 module.exports ={
@@ -65,7 +66,7 @@ getAllUsers:()=>{
         let userdetails=db.get().collection('shop').find().toArray()
         resolve(userdetails)
     })
-},
+},     
 
 
 blockUser:(userId)=>{
@@ -101,4 +102,33 @@ verifyUser:(userData)=>{
 },
 
 
+
+
+ 
+
 }
+
+
+// {
+            //     $lookup: {
+            //         from : 'water',
+            //         let: {proList : '$product'},
+            //         pipeline:[
+
+            //             {
+
+            //                 $match:{
+            //                     $expr:{
+            //                         $in:['$_id','$$proList']
+            //                     }
+
+            //                 }
+            //             }
+                            
+
+            //         ],
+            //         as:'cartItems'
+
+
+            //     }
+            // }

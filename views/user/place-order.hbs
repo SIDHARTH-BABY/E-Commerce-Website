@@ -1,0 +1,158 @@
+<section class="about_section layout_padding width:100%">
+  <div class="container">
+
+
+    <div class="row mx-4 row   ">
+     
+
+
+      <form id="checkout-form">
+        
+
+        <div class="detail-box ">
+          <div class="heading_container">
+            <h2>
+              Enter Delivery Details
+            </h2>
+          </div>
+          <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example3c">Name</label>
+              <input type="name" id="form3Example3c" name="name" class="form-control" required />
+            </div>
+          </div>
+
+
+          <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example1c">Address</label>
+              <input type="text" id="address" name="address" class="form-control" required />
+            </div>
+          </div>
+
+         
+          <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example3c">District</label>
+              <input type="text" id="form3Example3c" name="distirct" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example3c">Town/City</label>
+              <input type="text" id="form3Example3c" name="town" class="form-control" required />
+            </div>
+          </div>
+          <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example3c">State</label>
+              <input type="text" id="form3Example3c" name="state" class="form-control" required />
+            </div>
+          </div>
+           <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example4c">Pincode</label>
+              <input type="text" id="pincode" name="pincode" class="form-control" required />
+            </div>
+          </div>
+
+
+          <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example3c">Email</label>
+              <input type="email" id="form3Example3c" name="email" class="form-control" required />
+            </div>
+          </div>
+
+          
+
+           
+
+          <div class="form-outline mb-4">
+            <div class="form-outline flex-fill mb-0">
+              <label class="form-label" for="form3Example4c">Mobile</label>
+              <input type="text" id="form3Example4c" name="mobile" class="form-control" required />
+              <input type="text" id="" name="userId" value="{{user._id}}" hidden>
+            </div>
+          </div>
+
+
+        </div>
+         <div class=" mx-5 d-flex justify-content-left">
+          <div class="card mx-5" style="width: 18rem;">
+            <div class="card-body  ">
+              <h5 class="note note-dark text-secondary text-dark">Total Amount Rs:{{total}}</h5>
+
+
+              <div class="custom-control custom-radio">
+                <input type="radio" class="note note-dark text-secondary" value="COD" name="payment-method">
+                <label class="note note-dark text-secondary text-dark" for="defaultUnchecked">Cash on Delivery</label>
+              </div>
+
+              <div class="custom-control custom-radio">
+                <input type="radio" class="note note-dark text-secondary" value="ONLINE" name="payment-method">
+                <label class="note note-dark text-secondary text-dark" for="defaultUnchecked">Online Delivery</label>
+              </div>
+
+              <Button type="submit"  class="btn btn-warning">Place Order</Button>></Button>
+            </div>
+          </div>
+
+        </div>
+        </div>
+        </div>
+
+
+
+        
+
+      </form>
+
+    
+
+
+
+  
+</section>
+
+
+<script>
+
+  document.getElementById('checkout-form').addEventListener('submit', function(evt){
+    evt.preventDefault();
+    $.ajax({
+      url: '/place-order',
+    
+      method: 'post',
+      data: $('#checkout-form').serialize(),
+      success: (response) => {
+
+        if (response.status) {
+          location.href = '/order-success'
+
+
+        }
+    
+
+
+
+      }
+    })
+  
+})
+
+</script>
+
+{{!-- <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+  </script>
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js">
+  </script> --}}
+
+
+
+
+

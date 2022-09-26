@@ -17,14 +17,22 @@
             <tbody>
                 {{#each userdetails}}
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{inc @index}}</th>
                     <td>{{this.Name}} </td>
                     <td>{{this.Email}} </td>
                      <td>{{this.phone}} </td>
-                    <td>{{this.block}}</td>
+                   
+
+                   {{#if this.block}}
+                        <td ><a href="/admin/user-active/{{this._id}}" class="btn btn-success mt-5">active</a></td> 
+
+                {{else}}
+                         <td><a href="/admin/user-block/{{this._id}} " class="btn btn-danger mt-5">block</a></td>
+                         {{/if}}
+
            
-                    <td ><a href="/admin/user-active/{{this._id}}" class="btn btn-success mt-5">active</a></td> 
-                     <td><a href="/admin/user-block/{{this._id}} " class="btn btn-danger mt-5">block</a></td>
+                    
+                    
 
                 </tr>
                 {{/each}}

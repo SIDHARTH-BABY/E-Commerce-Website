@@ -41,7 +41,7 @@ getProductDetails:(proId)=>{
    })
   })
 },
-
+     
 updateProduct:(proId,proDetails)=>{
   return new Promise((resolve,reject)=>{
     db.get().collection('water')
@@ -60,14 +60,20 @@ updateProduct:(proId,proDetails)=>{
 },
 
 catProMatch:(catId)=>{
-  return new Promise((resolve,reject)=>{
-    let product = db.get().collection('water').find({Category:catId}).toArray()
-      resolve(product)
 
-  })
+  try {
+    return new Promise((resolve,reject)=>{
+      let product = db.get().collection('water').find({Category:catId}).toArray()
+        resolve(product)
+  
+    })
+    
+  } catch (error) {
 
+    throw new Error(error)
 
+  }
+  
 }
-
 
 }

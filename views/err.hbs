@@ -1,0 +1,110 @@
+
+
+
+    
+
+<div class="wrapper"> <h3><h1>{{message}}</h1>
+    <h2>{{error.status}}</h2>
+    <pre>{{error.stack}}</pre>
+
+    <h2>{{error}}
+        <br>
+        <a href="/" class="btn btn-primary mt-5 ml-5"><i class="fa fa-tachometer-alt me-2"></i>Home</a>
+    </h2></h3> <div class="boxes"> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> <div></div> </div> </div>
+
+      
+<style>
+    *{
+    padding:0;
+    margin:0;
+}
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(309deg, rgba(131, 58, 180, 1) 0%, rgba(200, 42, 18, 0.87718837535014) 79%)
+}
+
+.wrapper h3 {
+    position: relative;
+    top: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    opacity: 0.8
+}
+
+.boxes div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 2px solid #fff
+}
+
+.boxes div:nth-child(1) {
+    top: 70%;
+    left: 10%;
+    animation: box-animate 10s infinite
+}
+
+.boxes div:nth-child(2) {
+    top: 20%;
+    left: 80%;
+    animation: box-animate 9s infinite
+}
+
+.boxes div:nth-child(3) {
+    top: 50%;
+    left: 50%;
+    animation: box-animate 6s infinite
+}
+
+.boxes div:nth-child(4) {
+    top: 80%;
+    left: 60%;
+    animation: box-animate 15s infinite
+}
+
+.boxes div:nth-child(5) {
+    top: 30%;
+    left: 30%;
+    animation: box-animate 9s infinite
+}
+
+.boxes div:nth-child(6) {
+    top: 90%;
+    left: 90%;
+    animation: box-animate 12s infinite
+}
+
+.boxes div:nth-child(7) {
+    top: 80%;
+    left: 30%;
+    animation: box-animate 2s infinite
+}
+
+.boxes div:nth-child(8) {
+    top: 40%;
+    left: 20%;
+    animation: box-animate 2s infinite
+}
+
+.boxes div:nth-child(9) {
+    top: 50%;
+    left: 80%;
+    animation: box-animate 2s infinite
+}
+
+@keyframes box-animate {
+    0% {
+        transform: scale(0) translateY(0) rotate(0);
+        opacity: 1
+    }
+
+    100% {
+        transform: scale(1.3) translateY(-90px) rotate(360deg);
+        opacity: 0
+    }
+}
+</style>

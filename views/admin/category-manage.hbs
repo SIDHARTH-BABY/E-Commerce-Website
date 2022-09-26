@@ -1,4 +1,6 @@
 <div class="content">
+   <a href="/admin/add-category" class="btn btn-success">Add Category</a>
+   
 <section>
     <div class="container  d-flex justify-content-center"> 
         <div class="float-right">
@@ -9,14 +11,18 @@
                 <tr>
                     <th scope="col ">Number</th>
                     <th scope="col">Category</th>
+                   
+
                     
                 </tr>
             </thead>
             <tbody>
                 {{#each category}}
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{inc @index}}</th>
                     <td>{{this.category}} </td>
+                    
+                     
                    
                      <td><a href="/admin/delete-category/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure want to delete {{this.Name}} ?')">Delete</a></td>
                       

@@ -16,7 +16,8 @@ var session=require('express-session')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.engine('hbs', hbs.engine({ extname: 'hbs', defaultLayout: 'user-layout', layoutsDir: __dirname + '/views/layouts/', partialsDir: __dirname + '/views/partials/' }));
+app.engine('hbs',hbs.engine({helpers:{inc:function(value,options){return parseInt(value)+1;}},extname:'hbs',defaultLayout:'user-layout',layoutsDir:__dirname+'/views/layouts/',partialsDir:__dirname+'/views/partials/', runtimeOptions: { allowProtoPropertiesByDefault: true, allowProtoMethodsByDefault: true,},}));
+// app.engine('hbs', hbs.engine({ extname: 'hbs', defaultLayout: 'user-layout', layoutsDir: __dirname + '/views/layouts/', partialsDir: __dirname + '/views/partials/' }));
 // app.engine('hbs',hbs.engine({extname:'hbs', layoutsDir:__dirname + '/views/layouts/'}))
 
 

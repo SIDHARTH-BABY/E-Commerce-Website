@@ -26,12 +26,22 @@
 
 
             <select class="form-select" id="select" name="Category" aria-label="Default select example">
-                <option selected>Select Category</option>
+              <option selected>Select Category</option>
               {{#each category}}
-              <option value="{{this.category}}">{{this.category}}</option>
+              <option value="{{this.category}}" >{{this.category}}</option>
               {{/each}}
             </select>
 
+             
+
+               {{!-- <select class="form-select" id="select" name="Category" aria-label="Default select example">
+              <option selected>Select Category</option>
+              {{#each category}}
+              <option value="{{this.category}}"   onclick="addCat('{{this._id}}','{{this.category}}')">{{this.category}}</option>
+              {{/each}}
+            </select> --}}
+
+             
 
 
           </div>
@@ -46,8 +56,12 @@
 
 
 
-
-
-
-
 </div>
+
+
+
+
+<script>
+
+
+</script>
