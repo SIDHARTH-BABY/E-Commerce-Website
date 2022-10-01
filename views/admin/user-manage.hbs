@@ -1,44 +1,41 @@
 <div class="content">
-<section>
-    <div class="container"> 
-        
-        <table class="table mt-5">
-            <thead>
-                <tr>
-                    <th scope="col">Number</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">email</th>
-                    <th scope="col">Number</th>
+    <section>
+        <div class="container">
 
-                   
-                   
-                </tr>
-            </thead>
-            <tbody>
-                {{#each userdetails}}
-                <tr>
-                    <th scope="row">{{inc @index}}</th>
-                    <td>{{this.Name}} </td>
-                    <td>{{this.Email}} </td>
-                     <td>{{this.phone}} </td>
-                   
+            <table class="table mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Number</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Number</th>
 
-                   {{#if this.block}}
-                        <td ><a href="/admin/user-active/{{this._id}}" class="btn btn-success mt-5">active</a></td> 
 
-                {{else}}
-                         <td><a href="/admin/user-block/{{this._id}} " class="btn btn-danger mt-5">block</a></td>
-                         {{/if}}
 
-           
-                    
-                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each userdetails}}
+                    <tr>
+                        <th scope="row">{{inc @index}}</th>
+                        <td>{{this.Name}} </td>
+                        <td>{{this.Email}} </td>
+                        <td>{{this.phone}} </td>
 
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </div>
 
-</section>
+                        {{#if this.block}}
+                        <td><a href="/admin/user-active/{{this._id}}" class="btn btn-success mt-5">active</a></td>
+
+                        {{else}}
+                        <td><a href="/admin/user-block/{{this._id}} " class="btn btn-danger mt-5">block</a></td>
+                        {{/if}}
+
+
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+
+    </section>
 </div>

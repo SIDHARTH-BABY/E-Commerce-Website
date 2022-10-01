@@ -1,0 +1,35 @@
+
+<div class="content">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Sl.No</th>
+      <th scope="col">User Email</th>   
+      <th scope="col">Order Id</th>
+      <th scope="col">Payement </th>
+      <th scope="col">Date</th>
+      <th scope="col">Status</th>
+      
+    </tr>
+  </thead>
+  {{#each order}}
+  <tbody>
+    <tr>
+
+      <th scope="row">{{inc @index}}</th>
+      <td>{{deliveryDetails.email}}</td>
+      <td>{{this._id}}</td>
+      <td>{{this.paymentMethod}}</td>
+     <td>{{this.date}}</td>
+     
+      <td>{{this.status}}</td>
+       <td>
+        <a href="/admin/view-order/{{this._id}}" class="primary btn">View</a>
+      </td>
+    </tr>
+    
+  </tbody>
+  {{/each}}
+</table>
+
+</div>

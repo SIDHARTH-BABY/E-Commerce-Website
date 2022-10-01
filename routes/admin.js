@@ -9,6 +9,7 @@ const adminControllers = require('../controlers/admin-controllers');
 router.get('/',adminControllers.admin_home);
 
 
+router.get('/err',adminControllers.admin_err)
 
 
 router.get('/login',adminControllers.admin_login)
@@ -85,5 +86,23 @@ router.post('/add-category',adminControllers.admin_postAddCategory)
 
 router.get('/delete-category/:id',adminControllers.admin_deleteCategory)
 
+
+
+router.get('/order-list',adminControllers.orderList)
+
+
+
+
+router.get('/view-order/:id',adminControllers.view_order)
+
+
+router.get('/item-packed/:id',adminControllers.item_packed)
+
+
+router.get('/item-shipped/:id',adminControllers.item_shipped)
+
+
+
+router.get('/item-delivered/:id',adminControllers.item_delivered)
 
 module.exports = router;

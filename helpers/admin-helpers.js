@@ -1,44 +1,44 @@
 var db = require('../config/connection')
 
-var collection =require('../config/collections')
+var collection = require('../config/collections')
 const collections = require('../config/collections')
 
 
-module.exports ={
-    adminLogin:(adminData)=>{
-      
-        return new Promise(async(resolve,reject)=>{
-            
+module.exports = {
+    adminLogin: (adminData) => {
+
+        return new Promise(async (resolve, reject) => {
+
             var loginStatus = false
-            let response={}
-           
-             await db.get().collection('panel').findOne({Email:adminData.Email}).then((admin)=>{
-               
-            
-              if(admin){
-               
-                    if(admin.Password == adminData.Password){
+            let response = {}
+
+            await db.get().collection('panel').findOne({ Email: adminData.Email }).then((admin) => {
+
+
+                if (admin) {
+
+                    if (admin.Password == adminData.Password) {
                         console.log(adminData.Password);
                         console.log("login success");
-                        response.admin=admin
-                        response.status=true
+                        response.admin = admin
+                        response.status = true
                         resolve(response)
-                    }else{
+                    } else {
                         console.log("login failed");
-                        resolve({status:false})
-    
+                        resolve({ status: false })
+
                     }
-            
-            }else{
-                console.log("login failedd");
-                resolve({status:false})
-            }
+
+                } else {
+                    console.log("login failedd");
+                    resolve({ status: false })
+                }
             })
-          
-            
-    
+
+
+
         })
-       
+
     }
 
 }

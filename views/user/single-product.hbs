@@ -1,65 +1,72 @@
- <section class="about_section layout_padding ">
+<section class="about_section layout_padding ">
     <div class="container">
 
-      {{#with products}}
+        {{#with products}}
 
-      <div class="row mx-5 row d-flex justify-content-center">
+        <div class="row mx-5 row d-flex justify-content-center">
 
-      
- <div class="container  mb-5 ">
-    <div class="row d-flex justify-content-center ">
-        <div class="col-md-10">
-            <div class="card bg-dark ">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="images p-3">
-                            <div class="text-center p-4"> <img id="main-image" src="/product-images/{{this._id}}.png" width="250" /> </div>
-                            {{!-- <div class="thumbnail text-center"> <img onclick="change_image(this)" src="https://i.imgur.com/Rx7uKd0.jpg" width="70"> <img onclick="change_image(this)" src="https://i.imgur.com/Dhebu4F.jpg" width="70"> </div> --}}
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="product p-4">
-                           
-                            <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{this.Category}}</span>
-                                 <h3 class="card-header">{{this.name}}</h3>
+
+            <div class="container  mb-5 ">
+                <div class="row d-flex justify-content-center ">
+                    <div class="col-md-10">
+                        <div class="card bg-dark ">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="images p-3">
+                                        <div class="text-center p-4"> <img id="main-image"
+                                                src="/product-images/{{this._id}}.png" width="250" /> </div>
+                                        {{!-- <div class="thumbnail text-center"> <img onclick="change_image(this)"
+                                                src="https://i.imgur.com/Rx7uKd0.jpg" width="70"> <img
+                                                onclick="change_image(this)" src="https://i.imgur.com/Dhebu4F.jpg"
+                                                width="70"> </div> --}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="product p-4">
+
+                                        <div class="mt-4 mb-3"> <span
+                                                class="text-uppercase text-muted brand">{{this.Category}}</span>
+                                            <h3 class="card-header">{{this.name}}</h3>
+                                        </div>
+                                        <p class="about mdb-color white-text"> {{this.description}}</p>
+
+                                        <h6>
+                                            ₹{{this.price}}
+                                        </h6>
+                                        <h6>
+                                            Home Delivery Available
+                                        </h6>
+                                        {{!-- <div class="sizes mt-5">
+                                            <h6 class="text-uppercase">Size</h6> <label class="radio"> <input
+                                                    type="radio" name="size" value="S" checked> <span>S</span> </label>
+                                            <label class="radio"> <input type="radio" name="size" value="M">
+                                                <span>M</span> </label> <label class="radio"> <input type="radio"
+                                                    name="size" value="L"> <span>L</span> </label> <label class="radio">
+                                                <input type="radio" name="size" value="XL"> <span>XL</span> </label>
+                                            <label class="radio"> <input type="radio" name="size" value="XXL">
+                                                <span>XXL</span> </label>
+                                        </div> --}}
+                                        <div class="options">
+                                            <a href="#" class="btn btn-primary">Buy Now</a>
+
+                                        </div>
+                                        <div class="cart mt-4 align-items-center"> <button
+                                                class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i
+                                                class="fa fa-heart text-muted"></i> <i
+                                                class="fa fa-share-alt text-muted"></i> </div>
+                                    </div>
+                                </div>
                             </div>
-                            <p class="about mdb-color white-text"> {{this.description}}</p>
-
-                            <h6>
-                             ₹{{this.price}}
-                             </h6>
-                             <h6>
-                           Home Delivery Available
-                                  </h6>
-                            {{!-- <div class="sizes mt-5">
-                                <h6 class="text-uppercase">Size</h6> <label class="radio"> <input type="radio" name="size" value="S" checked> <span>S</span> </label> <label class="radio"> <input type="radio" name="size" value="M"> <span>M</span> </label> <label class="radio"> <input type="radio" name="size" value="L"> <span>L</span> </label> <label class="radio"> <input type="radio" name="size" value="XL"> <span>XL</span> </label> <label class="radio"> <input type="radio" name="size" value="XXL"> <span>XXL</span> </label>
-                            </div> --}}
-                             <div class="options">
-                               <a href="#" class="btn btn-primary">Buy Now</a>
-
-                             </div>
-                            <div class="cart mt-4 align-items-center"> <button class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
+        {{/with}}
+
+
     </div>
-</div>
 
-
-</div>
- {{/with}}
-
-
-   </div>
-
-  </section>
-
-
-  
-
-
-
-
-  
+</section>

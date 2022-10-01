@@ -1,85 +1,329 @@
 <div class="container rounded bg-white mt-5 mb-5">
+
+    {{#with userSignUpDetails}}
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
+                    width="150px"
+                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span
+                    class="font-weight-bold">{{this.Name}}</span><span class="text-black-50">{{this.Email}}</span><span>
+                </span>
+                <button type="button" class="btn btn-link btn-block mt-3" data-toggle="modal" data-target="#staticBackdrop1">
+                    Add Address
+                </button>
+
+                <button type="button" class="btn btn-link btn-block " data-toggle="modal" data-target="#nameChange">
+                    Edit Profile
+                </button>
+                <button type="button" class="btn btn-link btn-block  " data-toggle="modal" data-target="#password">
+                    Change Password
+                </button>
+                <a  class="btn btn-link btn-block " href="/order-list">
+                    View Orders
+                </a>
+            </div>
+
         </div>
+
         <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value=""></div>
-                    <div class="col-md-6"><label class="labels">Surname</label><input type="text" class="form-control" value="" placeholder="surname"></div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value=""></div>
-                    <div class="col-md-12"><label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value=""></div>
-                   
-                    <div class="col-md-12"><label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value=""></div>
-                    <div class="col-md-12"><label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value=""></div>
-                   
-                </div>
-                <div class="row mt-3">
-                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
-                </div>
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+            <form>
+                <div class="p-3 py-5">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="text-right">Profile Settings</h4>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels">Name </label><input type="text" name="Name"
+                                class="form-control" placeholder="{{this.Name}}" value="{{this.Name}}"></div>
+                        <div class="col-md-12"><label class="labels">Number </label><input type="text" name="Phone"
+                                class="form-control" placeholder="{{this.phone}}" value=""></div>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" name="Email"
+                                class="form-control" placeholder="{{this.Email}}" value=""></div>
+                    </div>
+
+
+
+            </form>
+
+
+        </div>
+
+
+
+
+    </div>
+    {{/with}}
+
+
+
+
+</div>
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog d-flex justify-content-center">
+        <div class="modal-content w-75">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Sign in</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form action="/user-profile" method="post">
+                    <!-- Email input -->
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Name</label><input type="text" name="Name"
+                                class="form-control" placeholder="Enter Name" value=""></div>
+
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" name="Email"
+                                class="form-control" placeholder="enter Email" value=""></div>
+                        <div class="col-md-12"><label class="labels">Building Name</label><input type="text"
+                                name="Building_Name" class="form-control" placeholder="enter Building Name" value="">
+                        </div>
+                        <div class="col-md-12"><label class="labels">Street Name</label><input type="text"
+                                name="Street_Name" class="form-control" placeholder="enter Street" value=""></div>
+                        <div class="col-md-12"><label class="labels">City</label><input type="text" name="City"
+                                class="form-control" placeholder="enter City" value=""></div>
+                        <div class="col-md-12"><label class="labels">District</label><input type="text" name="District"
+                                class="form-control" placeholder="enter District" value=""></div>
+                        <div class="col-md-12"><label class="labels">State</label><input type="text" name="State"
+                                class="form-control" placeholder="enter State" value=""></div>
+                        <div class="col-md-12"><label class="labels">Pincode</label><input type="text" name="Pincode"
+                                class="form-control" placeholder="enter Pincode" value=""></div>
+                        <div class="col-md-6"><label class="labels">Country</label><input type="text" name="Country"
+                                class="form-control" placeholder="country" value=""></div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block">save Address</button>
+                </form>
             </div>
         </div>
-       
     </div>
 </div>
+<!-- Modal -->
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="nameChange" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog d-flex justify-content-center">
+        <div class="modal-content w-75">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">Edit Name</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form action="/update-name" method="post">
+                    <!-- Email input -->
+                    <div class="col-md-6"><label class="labels">Name</label><input type="text" name="Name"
+                            class="form-control" placeholder="Enter Name" value=""></div>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Modal -->
+
+
+
+
+{{#each userAddress}}
+
+<div id="accordion">
+    <div class="card">
+
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-outline-info" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    Address{{inc @index}}
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <p class="card-text">Name: {{this.name}}</p>
+                <p class="card-text">City: {{this.city}}</p>
+                <p class="card-text">District: {{this.district}}</p>
+                <p class="card-text">State: {{this.state}}</p>
+                <p class="card-text">Country: {{this.country}}</p>
+
+             
+                  <td><a  href="" class="btn btn-success " data-toggle="modal" data-target="#editAddress{{this.id}}">
+                    Edit Address
+                </a></td>
+
+                <td><a href="/delete-address/{{this.id}}" class="btn btn-danger"
+                        onclick="return confirm('Are you sure want to delete {{this.name}} ?')">Delete</a></td>
+
+
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
+
+
+<div class="modal fade" id="editAddress{{this.id}}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog d-flex justify-content-center">
+        <div class="modal-content w-75">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1">EDIT ADDRESS</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form action="/edit-address/{{this.id}}" method="post">
+                    <!-- Email input -->
+                    <div class="row mt-3">
+                        <div class="col-md-6"><label class="labels">Name</label><input type="text" name="Name"
+                                class="form-control" placeholder=" {{this.name}} " value=" {{this.name}}"></div>
+
+                        <div class="col-md-12"><label class="labels">Building Name</label><input type="text"
+                                name="Building" class="form-control" placeholder="{{this.building}}" value="{{this.building}}">
+                        </div>
+                        <div class="col-md-12"><label class="labels">Street Name</label><input type="text"
+                                name="Street" class="form-control" placeholder="{{this.street}}" value="{{this.street}}"></div>
+                        <div class="col-md-12"><label class="labels">City</label><input type="text" name="City"
+                                class="form-control" placeholder=" {{this.city}}" value="{{this.city}}"></div>
+                        <div class="col-md-12"><label class="labels">District</label><input type="text" name="District"
+                                class="form-control" placeholder=" {{this.district}}" value="{{this.district}}"></div>
+                        <div class="col-md-12"><label class="labels">State</label><input type="text" name="State"
+                                class="form-control" placeholder="{{this.state}}" value="{{this.state}}"></div>
+                        <div class="col-md-12"><label class="labels">Pincode</label><input type="text" name="Pincode"
+                                class="form-control" placeholder="{{this.pincode}}" value=""></div>
+                        <div class="col-md-6"><label class="labels">Country</label><input type="text" name="Country"
+                                class="form-control" placeholder="{{this.country}}" value="{{this.country}}"></div>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button type="submit"  class="btn btn-primary btn-block">save Address</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/each}}
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                      <form action="/update-password" method="post">
+                    <!-- Email input -->
+                    <div class="col-md-6"><label class="labels">Passsword</label><input type="text" name="PasswordOne"
+                            class="form-control" placeholder="Enter Password" value=""></div>
+
+                            <div class="col-md-6"><label class="labels">Password</label><input type="text" name="PasswordTwo"
+                            class="form-control" placeholder="Enter Password" value=""></div>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Update</button>
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
 
 
 
 <script>
     body {
-    background: rgb(99, 39, 120)
-}
+        background: rgb(99, 39, 120)
+    }
 
-.form-control:focus {
-    box-shadow: none;
-    border-color: #BA68C8
-}
+.form - control:focus {
+        box - shadow: none;
+        border - color: #BA68C8
+    }
 
-.profile-button {
-    background: rgb(99, 39, 120);
-    box-shadow: none;
-    border: none
-}
+.profile - button {
+        background: rgb(99, 39, 120);
+        box - shadow: none;
+        border: none
+    }
 
-.profile-button:hover {
-    background: #682773
-}
+.profile - button:hover {
+        background: #682773
+    }
 
-.profile-button:focus {
-    background: #682773;
-    box-shadow: none
-}
+.profile - button:focus {
+        background: #682773;
+        box - shadow: none
+    }
 
-.profile-button:active {
-    background: #682773;
-    box-shadow: none
-}
+.profile - button:active {
+        background: #682773;
+        box - shadow: none
+    }
 
 .back:hover {
-    color: #682773;
-    cursor: pointer
-}
+        color: #682773;
+        cursor: pointer
+    }
 
 .labels {
-    font-size: 11px
-}
+        font - size: 11px
+    }
 
-.add-experience:hover {
-    background: #BA68C8;
-    color: #fff;
-    cursor: pointer;
-    border: solid 1px #BA68C8
+.add - experience:hover {
+        background: #BA68C8;
+        color: #fff;
+        cursor: pointer;
+        border: solid 1px #BA68C8
+    }
+
+
+
+
+</script>
+
+
+{{!-- <script>
+    function editAddress(adressId) {
+
+  $.ajax({
+    url: '/edit-address',
+    data: {
+      
+      adressId: adressId,
+      
+    },
+
+    method: 'post',
+    success: (response) => {
+     
+
+    }
+  })
 }
 </script>
+ --}}

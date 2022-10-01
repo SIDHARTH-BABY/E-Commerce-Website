@@ -21,6 +21,9 @@ const verifyLogin =(req,res,next)=>{
 router.get('/', userContollers.user_home );
 
 
+router.get('/err',userContollers.user_err)
+
+
 router.get('/category-product',userContollers.category_product)
 
 
@@ -70,6 +73,7 @@ router.get('/cart',verifyLogin, userContollers.user_cart)
 router.get('/add-to-cart/:id',verifyLogin, userContollers.user_addToCart)
 
 
+
 router.post('/change-product-quantity',userContollers.changeProdQuantity)
 
 
@@ -86,12 +90,37 @@ router.post ('/place-order',userContollers.post_placeOrder)
 router.get('/order-success',verifyLogin,userContollers.order_success)
 
 
-router.get('/user-profile',verifyLogin,userContollers.user_profile)
-
 router.get('/view-order/:id',verifyLogin,userContollers.view_order)
 
 
 router.get('/order-list',verifyLogin,userContollers.order_list)
+
+router.get('/user-profile',verifyLogin,userContollers.user_profile)
+
+
+router.post('/user-profile',verifyLogin,userContollers.post_userProfile)
+
+
+router.post('/update-name',verifyLogin,userContollers.post_updateName)
+
+
+router.post('/update-password',verifyLogin,userContollers.post_updatePassword)
+
+
+router.get('/delete-address/:id',verifyLogin,userContollers.delete_address)
+
+
+
+// router.get('/edit-address/',verifyLogin,userContollers.get_editAddress)
+
+router.post('/edit-address/:id',verifyLogin,userContollers.post_editAddress)
+
+
+
+
+
+
+
 
 
 

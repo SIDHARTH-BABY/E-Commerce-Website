@@ -2,49 +2,49 @@
 
 
 
-const client = require('twilio')('AC380e7cb3053aaa933849f8ce812f1d25','8e4795950a5d46b2b4443282abe24310');  
-const serviceSid = 'VAf7edb97afe289dda1a0df1aee1ebb495'        
+const client = require('twilio')('AC4dd774091e1a4d8e6b062e9922b3fd62', '025e348e439499b502ee9ea1642506f1');
+const serviceSid = 'VAcce36d37344c813949b71aa1407f8db1'
 
-module.exports={
-   
-    doSms:(userData)=>{
-        
-        return new Promise(async(resolve,reject)=>{
-            let res={}
+module.exports = {
+
+    doSms: (userData) => {
+
+        return new Promise(async (resolve, reject) => {
+            let res = {}
             console.log(userData);
             console.log('eeeeeeeeeeeeeeee');
             await client.verify.services(serviceSid).verifications.create({
-               
-                to :`+91${userData.phone}`,
-                channel:"sms"
-            }).then((reeee)=>{
-                res.valid=true;
-               resolve(res)
+
+                to: `+91${userData.phone}`,
+                channel: "sms"
+            }).then((reeee) => {
+                res.valid = true;
+                resolve(res)
                 console.log(reeee);
-            }).catch((err)=>{
-                
+            }).catch((err) => {
+
                 console.log(err);
 
             })
         })
     },
-   
-    otpVerify:(otpData,userData)=>{
+
+    otpVerify: (otpData, userData) => {
         console.log(otpData);
         console.log(userData);
-       
 
-        return new Promise(async(resolve,reject)=>{
+
+        return new Promise(async (resolve, reject) => {
             await client.verify.services(serviceSid).verificationChecks.create({
-                to :`+91${userData.phone}`,
-                code:otpData.otp
-            }).then((verifications)=>{
-                 console.log(verifications);
+                to: `+91${userData.phone}`,
+                code: otpData.otp
+            }).then((verifications) => {
+                console.log(verifications);
                 resolve(verifications.valid)
             })
         })
-    }
+    }
 
-   
 
- }
+
+}
