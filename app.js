@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let hbs = require('express-handlebars');
 
+const dotenv = require("dotenv")
+dotenv.config({path: './config.env'})
+
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 

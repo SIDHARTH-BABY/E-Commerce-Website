@@ -116,8 +116,7 @@ router.get('/delete-address/:id',verifyLogin,userContollers.delete_address)
 router.post('/edit-address/:id',verifyLogin,userContollers.post_editAddress)
 
 
-
-
+// router.get("/place-address/:id",verifyLogin,userContollers.get_placeAddress)
 
 
 

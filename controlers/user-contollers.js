@@ -102,7 +102,7 @@ module.exports = {
     try {
       let user = req.session.user
 
-      product = req.params.id
+      let product = req.params.id
 
       console.log(product);
 
@@ -376,18 +376,25 @@ module.exports = {
 
     }
 
-
   },
 
   placeOrder: async (req, res) => {
     try {
-      console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-
+     
+      let userId =req.session.user._id
       let user = req.session.user
-
+    
+      let addressId = req.query.id
+      console.log('addresidddddddddddddddddddddd');
+      console.log(addressId);
+      // let selectAddress=await userHelpers.placeAddress(addressId,userId)
+      // console.log(selectAddress);
+      
+      let userAddress = await userHelpers.userAddress(userId)
+    
 
       let total = await cartHelpers.getTotalAmount(req.session.user._id)
-      res.render('user/place-order', { total, user, layout: 'user-layout', userq: true })
+      res.render('user/place-order', { total, user, layout: 'user-layout', userq: true,userAddress })
 
     } catch (error) {
 
@@ -556,6 +563,18 @@ module.exports = {
 
 
   },
+
+  // get_placeAddress:(req, res) => {
+  
+  //   userId =req.session.user._id
+  //   let addressId = req.params.id
+  
+  //   let selectAddress=userHelpers.placeAddress(addressId,userId)
+
+  //   res.render('user/place-order',{selectAddress})
+
+
+  // }
 
 
 

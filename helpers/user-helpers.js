@@ -287,6 +287,41 @@ db.get().collection(collections.USER_collection).updateOne({ _id: objectId(userI
 })
 
 
+},
+
+
+placeAddress:(addressId,userId)=>{
+ 
+    return new Promise((resolve,reject) => {
+        let address= db.get().collection(collections.USER_collection).aggregate([
+            {
+                $match: { _id: objectId(userId) }
+            },
+            {
+                $unwind:'$Addresses'
+            },
+            {
+                $match: { 'Addresses._addId':addressId }
+            },
+            {
+                $project: {
+                    id:'$Addresses._addId',
+                    name:'$Addresses.Name',
+                    city:'$Addresses.City',
+                    pincode:'$Addresses.Pincode',
+                    district:'$Addresses.District',
+                    state:'$Addresses.State',
+                    country:'$Addresses.Country',
+                    building:'$Addresses.Building_Name',
+                    street:'$Addresses.Street_Name'
+               
+                }
+
+            }
+
+        ]).toArray()
+        resolve(address)
+    })
 }
 }
 
