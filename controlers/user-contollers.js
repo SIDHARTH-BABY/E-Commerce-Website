@@ -181,7 +181,7 @@ module.exports = {
   },
 
 
-  user_signUp: (req, res,next) => {
+  user_signUp: (req, res, next) => {
     try {
       signUpErr = req.session.signUpErr
       res.render('user/signup', { signUpErr })
@@ -199,7 +199,7 @@ module.exports = {
 
 
 
-  user_otp: (req, res,next) => {
+  user_otp: (req, res, next) => {
     try {
       invalid = req.session.message
       res.render('user/otp', { invalid })
@@ -213,7 +213,7 @@ module.exports = {
   },
 
 
-  user_postSignUp: (req, res,next) => {
+  user_postSignUp: (req, res, next) => {
     try {
       userHelpers.verifyUser(req.body).then((response) => {
         console.log(response);
@@ -280,7 +280,7 @@ module.exports = {
   },
 
 
-  user_postLogin: (req, res,next) => {
+  user_postLogin: (req, res, next) => {
     try {
       userHelpers.doLogin(req.body).then((response) => {
         if (response.status) {
@@ -302,7 +302,7 @@ module.exports = {
   },
 
 
-  user_logout: (req, res,next) => {
+  user_logout: (req, res, next) => {
     try {
       req.session.loggedIn = null;
       req.session.loggedIn = false
@@ -317,7 +317,7 @@ module.exports = {
   },
 
 
-  user_about: (req, res,next) => {
+  user_about: (req, res, next) => {
     try {
       let user = req.session.user
       res.render('user/about', { layout: 'user-layout', userq: true, user })
@@ -330,7 +330,7 @@ module.exports = {
 
   },
 
-  user_cart: async (req, res,next) => {
+  user_cart: async (req, res, next) => {
     try {
       console.log('kkkkk');
       let user = req.session.user
@@ -356,7 +356,7 @@ module.exports = {
 
 
 
-  user_addToCart: async (req, res,next) => {
+  user_addToCart: async (req, res, next) => {
     try {
 
 
@@ -378,7 +378,7 @@ module.exports = {
 
   changeProdQuantity: (req, res, next) => {
     try {
-      console.log(req.body);
+    
       let user = req.session.user
 
       cartHelpers.changeProductQuantity(req.body).then(async (response) => {
@@ -421,7 +421,7 @@ module.exports = {
 
   },
 
-  placeOrder: async (req, res,next) => {
+  placeOrder: async (req, res, next) => {
     try {
 
 
@@ -458,28 +458,31 @@ module.exports = {
     try {
 
       // let couponName =req.body.Couponname
+      let user = await userHelpers.getUserDetails(req.session.user._id)
 
       let order = req.body
 
-
+      let CoupDetails = req.session.coupon
+    
+      Couponname = CoupDetails.coupon
 
       let products = await cartHelpers.getCartProductList(req.body.userId)
-      let totalPrice = await cartHelpers.getTotalAmount(req.body.userId)
-      let grandTotal=order.grandtotal
 
-      grandTotal=parseInt(grandTotal)
-      console.log('satttttttttttttttttttttttttt');
-      console.log(grandTotal);
-      orderHelpers.placeOrder(order, products, totalPrice).then(async (orderId) => {
-        // let grandTotal=await orderHelpers.getGrandTotal(orderId)
-        // console.log(grandTotal,'hhhhhhhhhhh');
-        // console.log(totalPrice,'totallllllll');
-        // console.log('kkkkkkkkkkkkkk');
+      let totalPrice = await cartHelpers.getTotalAmount(req.body.userId)
+
+      let discount = CoupDetails.price
+      
+      let GrandTotal = totalPrice - discount
+
+
+     
+      orderHelpers.placeOrder(order, products, totalPrice, Couponname, req.session.user._id, GrandTotal, discount).then(async (orderId) => {
+
 
         if (req.body['payment-method'] === 'COD') {
           res.json({ codSuccess: true })
         } else {
-          razorpayHelpers.generateRazorpay(orderId, grandTotal).then((response) => {
+          razorpayHelpers.generateRazorpay(orderId, GrandTotal).then((response) => {
             res.json(response)
           })
         }
@@ -488,6 +491,7 @@ module.exports = {
 
 
     } catch (error) {
+      console.log(error);
 
       next(error)
 
@@ -497,7 +501,7 @@ module.exports = {
   },
 
 
-  order_success: (req, res,next) => {
+  order_success: (req, res, next) => {
     try {
       let user = req.session.user
       res.render('user/order-success', { user: req.session.user, layout: 'user-layout', userq: true })
@@ -514,7 +518,7 @@ module.exports = {
 
 
 
-  view_order: async (req, res,next) => {
+  view_order: async (req, res, next) => {
     try {
       let user = req.session.user
       let singleId = req.params.id
@@ -535,8 +539,8 @@ module.exports = {
   },
 
 
-  
-  order_list: async (req, res,next) => {
+
+  order_list: async (req, res, next) => {
     try {
       let user = req.session.user
       order = await orderHelpers.getOrderDetails(req.session.user._id)
@@ -555,7 +559,7 @@ module.exports = {
 
 
 
-  user_profile: async (req, res,next) => {
+  user_profile: async (req, res, next) => {
     try {
 
       user = req.session.user
@@ -578,7 +582,7 @@ module.exports = {
 
 
 
-  post_userProfile: async (req, res,next) => {
+  post_userProfile: async (req, res, next) => {
     try {
       console.log(req.body);
       userId = req.session.user._id
@@ -595,7 +599,7 @@ module.exports = {
 
 
 
-  post_updateName: async (req, res,next) => {
+  post_updateName: async (req, res, next) => {
     try {
       userId = req.session.user._id
 
@@ -612,7 +616,7 @@ module.exports = {
 
 
 
-  delete_address: async (req, res,next) => {
+  delete_address: async (req, res, next) => {
     try {
       userId = req.session.user._id
       addressId = req.params.id
@@ -631,7 +635,7 @@ module.exports = {
 
 
 
-  post_updatePassword: async (req, res,next) => {
+  post_updatePassword: async (req, res, next) => {
     try {
       userId = req.session.user._id
 
@@ -652,7 +656,7 @@ module.exports = {
 
 
 
-  post_editAddress: async (req, res,next) => {
+  post_editAddress: async (req, res, next) => {
     try {
       userId = req.session.user._id
       addressId = req.params.id
@@ -674,7 +678,7 @@ module.exports = {
 
 
 
-  post_verifyPayment: (req, res,next) => {
+  post_verifyPayment: (req, res, next) => {
     try {
       console.log(req.body);
       razorpayHelpers.verifyPayment(req.body).then(() => {
@@ -697,7 +701,7 @@ module.exports = {
 
 
 
-  item_cancelled: async (req, res,next) => {
+  item_cancelled: async (req, res, next) => {
     try {
       orderId = req.params.id
       console.log('cancelled');
@@ -715,7 +719,7 @@ module.exports = {
 
 
 
-  post_applyCoupon: (req, res,next) => {
+  post_applyCoupon: (req, res, next) => {
     try {
       console.log('aplyyyyyyyyyyyyyyyyyyyyy');
       console.log(req.body, 'reqqqqqqqqqqqqqqqqqqqqqqqq bodyyyyyyyyyyyyyyyyyyyyyyyy');

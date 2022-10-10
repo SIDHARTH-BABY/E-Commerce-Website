@@ -8,14 +8,16 @@ let objectId = require('mongodb').ObjectId
 
 
 module.exports = {
-    placeOrder: (order, products, total) => {
-        return new Promise((resolve, reject) => {
+    placeOrder: (order, products, total,Couponname,userId,GrandTotal,discount) => {
+        console.log('haiiiii');
+        console.log(userId,GrandTotal,discount);
+        return new Promise(async(resolve, reject) => {
 
             try {
 
                 console.log(order, products, total);
 
-                let status = order['payment-method'] === 'COD' ? 'placed' : 'pending'
+                let status = await order['payment-method'] === 'COD' ? 'placed' : 'pending'
                 let orderObj = {
                     deliveryDetails: {
                         email: order.email,
@@ -32,14 +34,21 @@ module.exports = {
                     paymentMethod: order['payment-method'],
                     products: products,
                     totalAmount: total,
-                    grandTotal: order['grandtotal'],
-                    couponName: order['Couponname'],
-                    couponDiscount: order['Discount'],
+                   
+                    Discount :discount,
+                    GrandTotal :GrandTotal,
+
+                    couponDiscount: discount,
 
                     status: status,
                     date: new Date().toDateString()
                 }
-                db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
+                let users = [objectId(userId)];
+                await db
+                    .get()
+                    .collection(collection.COUPON_COLLECTION)
+                    .updateOne({ coupon: Couponname }, { $set: { users } })
+                await db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response) => {
                     db.get().collection('cart').deleteOne({ user: objectId(order.userId) })
                     console.log("orderID:", response.insertedId);
                     resolve(response.insertedId)
@@ -48,6 +57,7 @@ module.exports = {
 
 
             } catch (error) {
+                console.log(error);
                 reject(error)
             }
 
@@ -234,8 +244,12 @@ module.exports = {
 
             } catch (error) {
                 reject(error)
+                
             }
+
         })
+
+
 
     },
 

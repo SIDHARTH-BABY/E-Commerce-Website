@@ -95,6 +95,7 @@ router.get('/view-order/:id',verifyLogin,userContollers.view_order)
 
 router.get('/order-list',verifyLogin,userContollers.order_list)
 
+
 router.get('/user-profile',verifyLogin,userContollers.user_profile)
 
 
@@ -111,14 +112,12 @@ router.get('/delete-address/:id',verifyLogin,userContollers.delete_address)
 
 
 
-// router.get('/edit-address/',verifyLogin,userContollers.get_editAddress)
-
 router.post('/edit-address/:id',verifyLogin,userContollers.post_editAddress)
 
 
 router.post('/verify-payment',verifyLogin,userContollers.post_verifyPayment)
 
-// router.get("/place-address",verifyLogin,userContollers.get_placeAddress)
+
 
 router.get('/item-cancelled/:id',userContollers.item_cancelled)
 

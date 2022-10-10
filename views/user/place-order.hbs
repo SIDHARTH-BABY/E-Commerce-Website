@@ -125,7 +125,7 @@
                       <input type="text" name="userId" id="userId" value="{{user._id}}" hidden>
 
                       <div>
-                        <input type="text" name="Couponname" id="Couponname" value="" hidden>
+                        <input type="text" name="Couponname" id="" value="" hidden>
                       </div>
                       <div>
                         <input type="text" name="Discount" id="Discount" value="" hidden>
@@ -286,15 +286,15 @@
 
   function applyCoupon() {
 
-    console.log("applyCoupon");
+   
 
     var coupon = document.getElementById('couponCode').value
 
-    console.log(coupon, "here it isssssssssssssss")
+  
 
     var userId = document.getElementById('userId').value
 
-    console.log(userId, "here it isssssssssssssss")
+
 
 
     var total = document.getElementById('total').innerHTML
@@ -302,7 +302,6 @@
 
 
 
-    console.log(total, "here it isssssssssssssss")
 
     $.ajax({
       url: '/apply-coupon',
