@@ -36,21 +36,9 @@
                                         <h6>
                                             Home Delivery Available
                                         </h6>
-                                        {{!-- <div class="sizes mt-5">
-                                            <h6 class="text-uppercase">Size</h6> <label class="radio"> <input
-                                                    type="radio" name="size" value="S" checked> <span>S</span> </label>
-                                            <label class="radio"> <input type="radio" name="size" value="M">
-                                                <span>M</span> </label> <label class="radio"> <input type="radio"
-                                                    name="size" value="L"> <span>L</span> </label> <label class="radio">
-                                                <input type="radio" name="size" value="XL"> <span>XL</span> </label>
-                                            <label class="radio"> <input type="radio" name="size" value="XXL">
-                                                <span>XXL</span> </label>
-                                        </div> --}}
-                                        <div class="options">
-                                            <a href="#" class="btn btn-primary">Buy Now</a>
-
-                                        </div>
-                                        <div class="cart mt-4 align-items-center"> <button
+                                        
+                                     
+                                        <div class="cart mt-4 align-items-center"> <button onclick="addToCart('{{this._id}}')" 
                                                 class="btn btn-danger text-uppercase mr-2 px-4">Add to cart</button> <i
                                                 class="fa fa-heart text-muted"></i> <i
                                                 class="fa fa-share-alt text-muted"></i> </div>
@@ -70,3 +58,83 @@
     </div>
 
 </section>
+<footer class="footer_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 footer-col">
+        <div class="footer_contact">
+          <h4>
+            Contact Us
+          </h4>
+          <div class="contact_link_box">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Location
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Call +01 1234567890
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                demo@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 footer-col">
+        <div class="footer_detail">
+          <a href="" class="footer-logo">
+            Feane
+          </a>
+          <p>
+            Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin
+            words, combined with
+          </p>
+          <div class="footer_social">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-pinterest" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 footer-col">
+        <h4>
+          Opening Hours
+        </h4>
+        <p>
+          Everyday
+        </p>
+        <p>
+          10.00 Am -10.00 Pm
+        </p>
+      </div>
+    </div>
+    <div class="footer-info">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a><br><br>
+        &copy; <span id="displayYear"></span> Distributed By
+        <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+      </p>
+    </div>
+  </div>
+</footer>

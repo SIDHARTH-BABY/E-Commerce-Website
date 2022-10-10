@@ -3,13 +3,23 @@ const express = require('express');
 const router = express.Router();
 const adminControllers = require('../controlers/admin-controllers');
 
+const createError = require('http-errors');
 
+
+
+const adminverifyLogin =(req,res,next)=>{
+    if( req.session.adminloggedIn){
+      next()
+    }else{
+      res.redirect('/admin/login')
+    }
+  }
 
 /* GET users listing. */
-router.get('/',adminControllers.admin_home);
+router.get('/',adminverifyLogin,adminControllers.admin_home);
 
 
-router.get('/err',adminControllers.admin_err)
+
 
 
 router.get('/login',adminControllers.admin_login)
@@ -27,82 +37,122 @@ router.get('/admin-logout',adminControllers.admin_logout)
 
 
 
-router.get('/user-manage',adminControllers.admin_userManage)
+router.get('/user-manage',adminverifyLogin,adminControllers.admin_userManage)
 
 
 
 
-router.get('/user-block/:id',adminControllers.block_user)
+router.get('/user-block/:id',adminverifyLogin,adminControllers.block_user)
 
 
 
 
-router.get('/user-active/:id',adminControllers.user_active)
+router.get('/user-active/:id',adminverifyLogin,adminControllers.user_active)
 
 
 
 
 
-router.get('/view-product',adminControllers.admin_viewProduct)
+router.get('/view-product',adminverifyLogin,adminControllers.admin_viewProduct)
 
 
 
 
-router.get('/add-product',adminControllers.admin_getAddProduct)
+router.get('/add-product',adminverifyLogin,adminControllers.admin_getAddProduct)
 
 
 
 
-router.post('/add-product',adminControllers.admin_postAddProduct)
+router.post('/add-product',adminverifyLogin,adminControllers.admin_postAddProduct)
 
 
 
 
-router.get('/delete-product/:id',adminControllers.admin_deleteProduct)
+router.get('/delete-product/:id',adminverifyLogin,adminControllers.admin_deleteProduct)
 
 
 
 
-router.get('/edit-product/:id',adminControllers.admin_editProduct)
+router.get('/edit-product/:id',adminverifyLogin,adminControllers.admin_editProduct)
 
 
 
 
-router.post('/edit-product/:id',adminControllers.admin_postEditProduct)
+router.post('/edit-product/:id',adminverifyLogin,adminControllers.admin_postEditProduct)
 
 
 
-router.get('/category-manage',adminControllers.admin_categoryMange)
+router.get('/category-manage',adminverifyLogin,adminControllers.admin_categoryMange)
 
 
 
-router.get('/add-category',adminControllers.admin_addCategory)
+router.get('/add-category',adminverifyLogin,adminControllers.admin_addCategory)
 
 
 
-router.post('/add-category',adminControllers.admin_postAddCategory)
+router.post('/add-category',adminverifyLogin,adminControllers.admin_postAddCategory)
 
 
 
-router.get('/delete-category/:id',adminControllers.admin_deleteCategory)
+router.get('/delete-category/:id',adminverifyLogin,adminControllers.admin_deleteCategory)
 
 
 
-router.get('/order-list',adminControllers.orderList)
+router.get('/order-list',adminverifyLogin,adminControllers.orderList)
 
 
 
 
-router.get('/view-order/:id',adminControllers.view_order)
+router.get('/view-order/:id',adminverifyLogin,adminControllers.view_order)
 
 
-router.get('/item-packed/:id',adminControllers.item_packed)
+router.get('/item-packed/:id',adminverifyLogin,adminControllers.item_packed)
 
 
-router.get('/item-shipped/:id',adminControllers.item_shipped)
+router.get('/item-shipped/:id',adminverifyLogin,adminControllers.item_shipped)
 
 
 
-router.get('/item-delivered/:id',adminControllers.item_delivered)
+router.get('/item-delivered/:id',adminverifyLogin,adminControllers.item_delivered)
+
+router.get('/coupon-manage',adminverifyLogin,adminControllers.couponManage)
+
+router.get('/add-coupon',adminverifyLogin,adminControllers.addCoupon)
+
+router.post('/add-coupon',adminverifyLogin,adminControllers.post_addCoupon)
+
+router.get('/delete-coupon/:id',adminverifyLogin,adminControllers.deleteCoupon)
+
+
+router.get('/banner-manage',adminverifyLogin,adminControllers.bannerManage)
+
+
+router.get('/add-banner',adminverifyLogin,adminControllers.addBanner)
+
+
+router.post('/add-banner',adminverifyLogin,adminControllers.post_addBanner)
+
+
+router.get('/delete-banner/:id',adminverifyLogin,adminControllers.deleteBanner)
+
+
+
+
+
+router.use(function(req, res, next) {
+    next(createError(404));
+  });
+  
+  // error handler
+  router.use(function(err, req, res, next) {
+    console.log(err);
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+    // render the error page
+    res.status(err.status || 500);
+    res.render('admin/error');
+  });
 
 module.exports = router;

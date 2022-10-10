@@ -114,7 +114,9 @@
                   Tasty Thursdays
                 </h5>
                 <h6>
-                  <span>20%</span> Off
+                  {{#each viewCoupon}}
+                  <span>₹{{this.price}}</span> Off
+                    {{/each}}
                 </h6>
                 <a href="">
                   Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -644,7 +646,4 @@
 
   </html>
 
-  <script>
-
-
-  </script>
+  

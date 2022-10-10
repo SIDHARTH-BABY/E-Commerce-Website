@@ -4,9 +4,7 @@
     <div class="row mx-5 row d-flex justify-content-center">
       <div class="col-md-6 ">
         
-          <a href="#" class="logo">
-						<img src="images/logo/logo1.gif" style="width:370px; height:370px" alt="IMG-LOGO">
-					 </a>
+       
        
       </div>
       <div class="col-md-6">
@@ -23,7 +21,7 @@
 
 
 
-          <form action="/signup" method="post" class="mx-1 mx-md-4 mt-5" id="signup-form">
+          <form  onsubmit ="return matchPassword()" action="/signup" method="post" class="mx-1 mx-md-4 mt-5" id="signup-form">
 
             <div class="form-outline mb-4">
               <div class="form-outline flex-fill mb-0">
@@ -43,16 +41,17 @@
             <div class="form-outline mb-4">
               <div class="form-outline flex-fill mb-0">
                 <label class="form-label" for="form3Example4c">Password</label>
-                <input type="password" id="form3Example4c" name="Password" class="form-control" required />
+                <input type="password" id="passOne" name="Password" class="form-control" required />
               </div>
             </div>
 
             <div class="form-outline mb-4">
               <div class="form-outline flex-fill mb-0">
                 <label class="form-label" for="form3Example4cd">Confirm password</label>
-                <input type="password" id="form3Example4cd" name="Password2" class="form-control" required />
+                <input type="password" id="passTwo" name="Password2" class="form-control" required />
 
               </div>
+               <p class="message"></p>
             </div>
 
             <div class="form-outline mb-4">
@@ -85,3 +84,20 @@
     </div>
   </div>
 </section>
+
+<script>
+  function matchPassword() {  
+  var pw1 = document.getElementById("passOne").value;  
+  var pw2 = document.getElementById("passTwo").value;  
+  if(pw1 != pw2)  
+  {   
+    alert("Password did not match"); 
+     return false;  
+
+  } else {  
+    alert(" Password Confirmed");  
+  return true;  
+  }  
+
+}  
+</script>

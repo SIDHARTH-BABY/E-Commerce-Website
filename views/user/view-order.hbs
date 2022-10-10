@@ -3,19 +3,18 @@
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-lg-10 col-xl-8">
         <div class="card" style="border-radius: 10px;">
-         
+
           <div class="card-body p-4">
-            
+
             <div class="card shadow-0 border mb-4">
               <div class="card-body">
                 {{#each singleOrder}}
                 <div class="row">
                   <div class="col-md-2">
-                    <img src="/product-images/{{this.product._id}}.png"
-                      class="img-fluid" alt="Phone">
+                    <img src="/product-images/{{this.product._id}}.png" class="img-fluid" alt="Phone">
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0"></p>
+                    <p class="text-muted mb-0">{{this.status}}</p>
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-0 small">{{this.product.name}}</p>
@@ -29,8 +28,38 @@
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-0 small"></p>
                   </div>
+                  {{!-- {{#if this.value}}
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small"></p>
+                  </div>
+
+                  {{/if}} --}}
+
                 </div>
+
                 {{/each}}
+
+
+
+
+                {{#with value}}
+
+              
+
+                {{#if status}}
+
+                <a class="btn btn-success mt-2" href="#" role="button">Enjoy Our Delicious Food...</a>
+                {{else}}
+
+                <a class="btn btn-danger mt-2" href="/item-cancelled/{{this.id}}" role="button">Cancel Order</a>
+
+                {{/if}}
+
+                
+
+                {{/with}}
+
+
                 <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
                 <div class="row d-flex align-items-center">
                   <div class="col-md-2">
@@ -50,12 +79,13 @@
                 </div>
               </div>
             </div>
-            
 
-           
-         
+
+
+
+          </div>
         </div>
       </div>
-    </div>
-  {{!-- </div> --}}
+      {{!--
+    </div> --}}
 </section>

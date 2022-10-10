@@ -66,20 +66,25 @@
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
     <div class="modal-dialog d-flex justify-content-center">
-        <div class="modal-content w-75">
+        <div class="modal-content w-70">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1">Sign in</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalLabel1">Add Address</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                
             </div>
-            <div class="modal-body p-4">
+            <div class="modal-body p-3">
                 <form action="/user-profile" method="post">
                     <!-- Email input -->
                     <div class="row mt-3">
-                        <div class="col-md-6"><label class="labels">Name</label><input type="text" name="Name"
+                        <div class="col-md-12"><label class="labels">Name</label><input type="text" name="Name"
                                 class="form-control" placeholder="Enter Name" value=""></div>
 
                         <div class="col-md-12"><label class="labels">Email</label><input type="text" name="Email"
                                 class="form-control" placeholder="enter Email" value=""></div>
+
+                                 <div class="col-md-12"><label class="labels">Mobile</label><input type="number" name="mobile"
+                                class="form-control" placeholder="enter Mobile" value=""></div>
+
                         <div class="col-md-12"><label class="labels">Building Name</label><input type="text"
                                 name="Building_Name" class="form-control" placeholder="enter Building Name" value="">
                         </div>
@@ -93,7 +98,7 @@
                                 class="form-control" placeholder="enter State" value=""></div>
                         <div class="col-md-12"><label class="labels">Pincode</label><input type="text" name="Pincode"
                                 class="form-control" placeholder="enter Pincode" value=""></div>
-                        <div class="col-md-6"><label class="labels">Country</label><input type="text" name="Country"
+                        <div class="col-md-12"><label class="labels">Country</label><input type="text" name="Country"
                                 class="form-control" placeholder="country" value=""></div>
                     </div>
 
@@ -152,6 +157,8 @@
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 <p class="card-text">Name: {{this.name}}</p>
+                <p class="card-text">Email: {{this.Email}}</p>
+                <p class="card-text">Mobile: {{this.mobile}}</p>
                 <p class="card-text">City: {{this.city}}</p>
                 <p class="card-text">District: {{this.district}}</p>
                 <p class="card-text">State: {{this.state}}</p>
@@ -188,6 +195,10 @@
                     <div class="row mt-3">
                         <div class="col-md-6"><label class="labels">Name</label><input type="text" name="Name"
                                 class="form-control" placeholder=" {{this.name}} " value=" {{this.name}}"></div>
+
+                                  <div class="col-md-6"><label class="labels">Email</label><input type="text" name="Name"
+                                class="form-control" placeholder=" {{this.Email}} " value=" {{this.Email}}"></div>
+                                
 
                         <div class="col-md-12"><label class="labels">Building Name</label><input type="text"
                                 name="Building" class="form-control" placeholder="{{this.building}}" value="{{this.building}}">
@@ -231,13 +242,16 @@
             </div>
             <div class="modal-body">
 
-                      <form action="/update-password" method="post">
+                      <form onsubmit ="return checkPassword()" action="/update-password" method="post">
                     <!-- Email input -->
-                    <div class="col-md-6"><label class="labels">Passsword</label><input type="text" name="PasswordOne"
+                    <div class="col-md-6"><label class="labels">Enter Old Password</label><input type="text" 
                             class="form-control" placeholder="Enter Password" value=""></div>
 
-                            <div class="col-md-6"><label class="labels">Password</label><input type="text" name="PasswordTwo"
-                            class="form-control" placeholder="Enter Password" value=""></div>
+                    <div class="col-md-6"><label class="labels">Passsword</label><input type="text" name="PasswordOne"
+                            class="form-control" placeholder="Enter Password" id="passFirst" value=""></div>
+
+                            <div class="col-md-6"><label class="labels">Confirm Password</label><input type="text"
+                            class="form-control" placeholder="Confirm Password " id="passSecond" value=""></div>
                     <!-- Submit button -->
                     <button type="submit" class="btn btn-primary btn-block mt-3">Update</button>
                 </form>
@@ -250,6 +264,88 @@
     </div>
 </div>
 
+
+
+<footer class="footer_section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 footer-col">
+        <div class="footer_contact">
+          <h4>
+            Contact Us
+          </h4>
+          <div class="contact_link_box">
+            <a href="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Location
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Call +01 1234567890
+              </span>
+            </a>
+            <a href="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                demo@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 footer-col">
+        <div class="footer_detail">
+          <a href="" class="footer-logo">
+            Feane
+          </a>
+          <p>
+            Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin
+            words, combined with
+          </p>
+          <div class="footer_social">
+            <a href="">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="">
+              <i class="fa fa-pinterest" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 footer-col">
+        <h4>
+          Opening Hours
+        </h4>
+        <p>
+          Everyday
+        </p>
+        <p>
+          10.00 Am -10.00 Pm
+        </p>
+      </div>
+    </div>
+    <div class="footer-info">
+      <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a><br><br>
+        &copy; <span id="displayYear"></span> Distributed By
+        <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+      </p>
+    </div>
+  </div>
+</footer>
 
 
 
@@ -307,23 +403,21 @@
 </script>
 
 
-{{!-- <script>
-    function editAddress(adressId) {
 
-  $.ajax({
-    url: '/edit-address',
-    data: {
-      
-      adressId: adressId,
-      
-    },
+<script>
+  function checkPassword() {  
+  var pw1 = document.getElementById("passFirst").value;  
+  var pw2 = document.getElementById("passSecond").value;  
+  if(pw1 != pw2)  
+  {   
+    alert("Passwords did not match"); 
+     return false;  
 
-    method: 'post',
-    success: (response) => {
-     
+  } else {  
+    alert("Password created successfully");  
+    
+  return true;  
+  }  
 
-    }
-  })
-}
+}  
 </script>
- --}}

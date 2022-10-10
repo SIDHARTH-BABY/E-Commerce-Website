@@ -1,0 +1,27 @@
+
+<div class="content">
+<section>
+  <div class=" container row d-flex justify-content-center">
+    <div class="ml-5 col-md-6">
+    
+      <form action="/admin/add-coupon" method="post" > 
+      {{!-- enctype    kodthalee  image file upload cheyyullu--}}
+        <label for="">Add Coupon code</label>
+        <input type="text" name="coupon" class="form-control">
+
+         <label for="">Discount Price</label>
+        <input type="number" name="price" class="form-control">
+
+         <label for="">Expiry Date</label>
+        <input type="date" name="expiry" class="form-control">
+
+
+
+        <button type="submit" class="btn btn-success mt-4">Add Coupon</button>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+</div>

@@ -1,0 +1,47 @@
+
+<div class="content">
+   <a href="/admin/add-coupon" class="btn btn-success">Add Coupon</a>
+   
+<section>
+    <div class="container  d-flex justify-content-center"> 
+        <div class="float-right">
+            
+        </div>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col ">Number</th>
+                    <th scope="col">Coupon</th>
+                    <th scope="col">Price</th>
+                     <th scope="col">Expiry</th>
+
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {{#each viewCoupon}}
+                <tr>
+                    <th scope="row">{{inc @index}}</th>
+                    <td> {{this.coupon}}</td>
+                      <td> {{this.price}}</td>
+                        <td> {{this.expiry}}</td>
+                    
+                     
+                   
+                     <td><a href="/admin/delete-coupon/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure want to delete {{this.Name}} ?')">Delete</a></td>
+                      
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+       
+    </div>
+
+    
+
+    
+
+</section>
+
+</div>

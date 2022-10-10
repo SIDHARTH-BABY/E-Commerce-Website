@@ -18,16 +18,16 @@ const verifyLogin =(req,res,next)=>{
 /* GET home page. */
 
 
-router.get('/', userContollers.user_home );
+router.get('/',verifyLogin, userContollers.user_home );
 
 
-router.get('/err',userContollers.user_err)
 
 
-router.get('/category-product',userContollers.category_product)
+
+router.get('/category-product',verifyLogin,userContollers.category_product)
 
 
-router.get('/user-menu',userContollers.user_menu)
+router.get('/user-menu',verifyLogin,userContollers.user_menu)
 
 
 router.get('/single-product/:id',userContollers.single_product)
@@ -116,12 +116,15 @@ router.get('/delete-address/:id',verifyLogin,userContollers.delete_address)
 router.post('/edit-address/:id',verifyLogin,userContollers.post_editAddress)
 
 
-// router.get("/place-address/:id",verifyLogin,userContollers.get_placeAddress)
+router.post('/verify-payment',verifyLogin,userContollers.post_verifyPayment)
+
+// router.get("/place-address",verifyLogin,userContollers.get_placeAddress)
+
+router.get('/item-cancelled/:id',userContollers.item_cancelled)
 
 
 
-
-
+router.post('/apply-coupon',userContollers.post_applyCoupon)
 
 
 

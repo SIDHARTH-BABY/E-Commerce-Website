@@ -33,7 +33,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
-app.use(session({secret:'Key',cookie:{maxAge:60000}}))
+app.use(session({secret:'Key',cookie:{maxAge:600000}}))
 
 app.use(function(req,res,next){
   res.header('Cache-Control','no-cache,private,no-store,must-revalidate,max-stale=0,post-check=0,pre-check=0');
@@ -49,6 +49,12 @@ db.connect((err)=>{
 app.use('/', userRouter);
 app.use('/admin', adminRouter);
 
+app.all('*',(req,res,next)=>{
+ res.status(404).json({
+  status:'fail',
+  message: `can't find ${req.originalUrl} on this server!`
+ })
+})
 
 
 // catch 404 and forward to error handler
@@ -64,7 +70,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('user/error');
 });
 
 module.exports = app;

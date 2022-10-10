@@ -7,7 +7,8 @@ const twilioHelpers = require('../helpers/twilio-helpers');
 const categoryHelpers = require('../helpers/category-helpers');
 const cartHelpers = require('../helpers/cart-helpers');
 const orderHelpers = require('../helpers/order-helpers');
-
+const razorpayHelpers = require('../helpers/razorpay-helpers');
+const couponHelpers = require('../helpers/coupon-helpers');
 
 
 
@@ -24,11 +25,13 @@ module.exports = {
 
         cartCount = await cartHelpers.getCartCount(req.session.user._id)
 
+        let viewCoupon = await couponHelpers.viewCoupon()
+
         products = await productHelpers.getAllProduct()
 
         catdetails = await categoryHelpers.viewCategory()
 
-        res.render('user/user-home', { layout: 'user-layout', userq: true, products, user, catdetails, cartCount })
+        res.render('user/user-home', { layout: 'user-layout', userq: true, products, user, catdetails, cartCount, viewCoupon })
 
       } else {
         products = await productHelpers.getAllProduct()
@@ -41,34 +44,56 @@ module.exports = {
 
     } catch (error) {
 
-      res.redirect('/err', { error })
+      next(error)
     }
 
   },
 
   category_product: async (req, res, next) => {
     try {
-      let user = req.session.user
-
-      catdetails = await categoryHelpers.viewCategory()
-
-
-      let catId = req.query.category
-
-      console.log(catId);
+      if (req.session.loggedIn) {
+        let user = req.session.user
+        cartCount = await cartHelpers.getCartCount(req.session.user._id)
+        catdetails = await categoryHelpers.viewCategory()
 
 
-      productHelpers.catProMatch(catId).then((products) => {
-        console.log(products);
-        res.render('user/user-category', { layout: 'user-layout', userq: true, products, user, catdetails })
-      }).catch((err) => {
+        let catId = req.query.category
 
-        res.render('user/user-category', { err })
-       
-      })
+        console.log(catId);
+
+
+        productHelpers.catProMatch(catId).then((products) => {
+          console.log(products);
+          res.render('user/user-category', { layout: 'user-layout', userq: true, products, user, catdetails, cartCount })
+        }).catch((err) => {
+
+          res.render('user/user-category', { err })
+
+        })
+
+      } else {
+        catdetails = await categoryHelpers.viewCategory()
+
+
+        let catId = req.query.category
+
+
+
+
+        productHelpers.catProMatch(catId).then((products) => {
+
+          res.render('user/user-category', { layout: 'user-layout', userq: true, products, catdetails })
+        }).catch((err) => {
+
+          res.render('user/user-category', { err })
+
+        })
+
+      }
+
 
     } catch (error) {
-      res.redirect('/err', { error })
+      next(error)
     }
 
 
@@ -80,9 +105,10 @@ module.exports = {
     try {
       if (req.session.loggedIn) {
         let user = req.session.user
+        cartCount = await cartHelpers.getCartCount(req.session.user._id)
         catdetails = await categoryHelpers.viewCategory()
         productHelpers.getAllProduct().then((products) => {
-          res.render('user/user-menu', { layout: 'user-layout', userq: true, products, user, catdetails })
+          res.render('user/user-menu', { layout: 'user-layout', userq: true, products, user, catdetails, cartCount })
         })
       } else {
         productHelpers.getAllProduct().then(async (products) => {
@@ -92,7 +118,7 @@ module.exports = {
       }
 
     } catch (error) {
-      res.redirect('/err', { error })
+      next(error)
     }
 
   },
@@ -100,19 +126,30 @@ module.exports = {
   single_product: async (req, res, next) => {
 
     try {
-      let user = req.session.user
+      if (req.session.loggedIn) {
+        let user = req.session.user
+        cartCount = await cartHelpers.getCartCount(req.session.user._id)
+        let product = req.params.id
 
-      let product = req.params.id
+        console.log(product);
 
-      console.log(product);
-
-      let products = await productHelpers.getProductDetails(product)
+        let products = await productHelpers.getProductDetails(product)
 
 
-      res.render('user/single-product', { layout: 'user-layout', userq: true, products, user })
+        res.render('user/single-product', { layout: 'user-layout', userq: true, products, user, cartCount })
+
+      } else {
+        let products = await productHelpers.getProductDetails(product)
+
+
+        res.render('user/single-product', { layout: 'user-layout', userq: true, products })
+
+      }
+
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -137,38 +174,46 @@ module.exports = {
       }
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
     }
 
   },
 
-  user_signUp: (req, res) => {
+
+  user_signUp: (req, res,next) => {
     try {
       signUpErr = req.session.signUpErr
       res.render('user/signup', { signUpErr })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
   },
 
 
-  user_otp: (req, res) => {
+
+
+
+
+  user_otp: (req, res,next) => {
     try {
       invalid = req.session.message
       res.render('user/otp', { invalid })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
   },
 
 
-  user_postSignUp: (req, res) => {
+  user_postSignUp: (req, res,next) => {
     try {
       userHelpers.verifyUser(req.body).then((response) => {
         console.log(response);
@@ -197,7 +242,8 @@ module.exports = {
 
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
     }
 
   },
@@ -225,7 +271,8 @@ module.exports = {
       })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -233,7 +280,7 @@ module.exports = {
   },
 
 
-  user_postLogin: (req, res) => {
+  user_postLogin: (req, res,next) => {
     try {
       userHelpers.doLogin(req.body).then((response) => {
         if (response.status) {
@@ -246,7 +293,8 @@ module.exports = {
       })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -254,48 +302,53 @@ module.exports = {
   },
 
 
-  user_logout: (req, res) => {
+  user_logout: (req, res,next) => {
     try {
       req.session.loggedIn = null;
       req.session.loggedIn = false
       res.redirect('/')
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
   },
 
 
-  user_about: (req, res) => {
+  user_about: (req, res,next) => {
     try {
       let user = req.session.user
       res.render('user/about', { layout: 'user-layout', userq: true, user })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
   },
 
-  user_cart: async (req, res) => {
+  user_cart: async (req, res,next) => {
     try {
       console.log('kkkkk');
       let user = req.session.user
       let products = await cartHelpers.getCartProduct(req.session.user._id)
+      let totalValue = 0
+      if (products.length > 0) {
+        totalValue = await cartHelpers.getTotalAmount(req.session.user._id)
+      }
 
-      let totalValue = await cartHelpers.getTotalAmount(req.session.user._id)
 
-      console.log(req.session.user._id + 'qqqqqqqqqqqqqqqqqqqqqqqq');
-      console.log(totalValue);
+
 
 
       res.render('user/cart', { layout: 'user-layout', userq: true, products, user, totalValue })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -303,13 +356,9 @@ module.exports = {
 
 
 
-  user_addToCart: async (req, res) => {
+  user_addToCart: async (req, res,next) => {
     try {
-      console.log('api call');
 
-      console.log(req.params.id);
-
-      console.log('heeeee');
 
 
       let cartIt = await cartHelpers.addToCart(req.session.user._id, req.params.id)
@@ -317,18 +366,10 @@ module.exports = {
       res.json({ status: true })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
-
-
-
-
-
-
-
-
-    // res.redirect('/')
 
 
 
@@ -352,7 +393,8 @@ module.exports = {
       })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -372,33 +414,39 @@ module.exports = {
       })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
   },
 
-  placeOrder: async (req, res) => {
+  placeOrder: async (req, res,next) => {
     try {
-     
-      let userId =req.session.user._id
+
+
+      let viewCoupon = await couponHelpers.viewCoupon()
+      let userId = req.session.user._id
       let user = req.session.user
-    
+
       let addressId = req.query.id
-      console.log('addresidddddddddddddddddddddd');
-      console.log(addressId);
-      // let selectAddress=await userHelpers.placeAddress(addressId,userId)
-      // console.log(selectAddress);
-      
+
+
+
+      let selectAddress = await userHelpers.placeAddress(addressId, userId)
+
+
+
       let userAddress = await userHelpers.userAddress(userId)
-    
+
 
       let total = await cartHelpers.getTotalAmount(req.session.user._id)
-      res.render('user/place-order', { total, user, layout: 'user-layout', userq: true,userAddress })
+      res.render('user/place-order', { total, user, layout: 'user-layout', userq: true, userAddress, selectAddress, viewCoupon })
 
     } catch (error) {
 
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -406,21 +454,42 @@ module.exports = {
 
 
 
-  post_placeOrder: async (req, res) => {
+  post_placeOrder: async (req, res, next) => {
     try {
-      console.log('rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr');
+
+      // let couponName =req.body.Couponname
+
+      let order = req.body
+
+
+
       let products = await cartHelpers.getCartProductList(req.body.userId)
       let totalPrice = await cartHelpers.getTotalAmount(req.body.userId)
-      orderHelpers.placeOrder(req.body, products, totalPrice).then((response) => {
-        console.log('kkkkkkkkkkkkkk');
-        console.log(response);
-        res.json({ status: true })
+      let grandTotal=order.grandtotal
+
+      grandTotal=parseInt(grandTotal)
+      console.log('satttttttttttttttttttttttttt');
+      console.log(grandTotal);
+      orderHelpers.placeOrder(order, products, totalPrice).then(async (orderId) => {
+        // let grandTotal=await orderHelpers.getGrandTotal(orderId)
+        // console.log(grandTotal,'hhhhhhhhhhh');
+        // console.log(totalPrice,'totallllllll');
+        // console.log('kkkkkkkkkkkkkk');
+
+        if (req.body['payment-method'] === 'COD') {
+          res.json({ codSuccess: true })
+        } else {
+          razorpayHelpers.generateRazorpay(orderId, grandTotal).then((response) => {
+            res.json(response)
+          })
+        }
 
       })
-      console.log(req.body);
+
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -428,13 +497,14 @@ module.exports = {
   },
 
 
-  order_success: (req, res) => {
+  order_success: (req, res,next) => {
     try {
       let user = req.session.user
-      res.render('user/order-success', { user: req.session.user, layout: 'user-layout', userq: true})
+      res.render('user/order-success', { user: req.session.user, layout: 'user-layout', userq: true })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
@@ -442,143 +512,236 @@ module.exports = {
   },
 
 
-  
 
-  view_order: async (req, res) => {
+
+  view_order: async (req, res,next) => {
     try {
       let user = req.session.user
       let singleId = req.params.id
-      singleOrder = await orderHelpers.getSingleOrder(singleId)
-      console.log(singleOrder);
 
-      res.render('user/view-order', { layout: 'user-layout', userq: true, singleOrder,user })
+
+
+      value = await orderHelpers.value(singleId)
+
+      singleOrder = await orderHelpers.getSingleOrder(singleId)
+
+
+      res.render('user/view-order', { layout: 'user-layout', userq: true, singleOrder, user, value })
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
     }
 
   },
 
-  order_list: async (req, res) => {
+
+  
+  order_list: async (req, res,next) => {
     try {
       let user = req.session.user
       order = await orderHelpers.getOrderDetails(req.session.user._id)
-      
+
       console.log(order);
-      res.render('user/order-list', { layout: 'user-layout', userq: true, order ,user})
+      res.render('user/order-list', { layout: 'user-layout', userq: true, order, user })
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
   },
 
-  user_err:(req,res)=>{
-    res.render('/err')
-  },
 
 
-  user_profile: async(req, res) => {
+
+  user_profile: async (req, res,next) => {
     try {
-       user = req.session.user
-      userId =req.session.user._id
+
+      user = req.session.user
+      userId = req.session.user._id
+      cartCount = await cartHelpers.getCartCount(req.session.user._id)
       let userAddress = await userHelpers.userAddress(userId)
-  
+
       let userSignUpDetails = await userHelpers.getUserDetails(userId)
-   
-      res.render('user/user-profile', { layout: 'user-layout', userq: true, user,userSignUpDetails,userAddress })
+
+      res.render('user/user-profile', { layout: 'user-layout', userq: true, user, userSignUpDetails, userAddress, cartCount })
+
 
     } catch (error) {
-      res.redirect('/err', { error })
+
+      next(error)
 
     }
 
   },
 
 
-  post_userProfile:async(req,res)=>{
-    console.log(req.body);
-    userId =req.session.user._id
 
-    let userProfileDetails =await  userHelpers.profileDetails(req.body,userId)
-    
-    res.redirect('/user-profile')
-  },
+  post_userProfile: async (req, res,next) => {
+    try {
+      console.log(req.body);
+      userId = req.session.user._id
 
+      let userProfileDetails = await userHelpers.profileDetails(req.body, userId)
 
-
-  post_updateName:async(req,res)=>{
-    userId =req.session.user._id
-
-    let userName = await userHelpers.updateUsername(userId,req.body)
-
-    res.redirect('/user-profile')
-
-  },
-
-
-
-  delete_address:async(req,res)=>{
-    userId =req.session.user._id
-    addressId =req.params.id
-    console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-    console.log(addressId);
-    
-    let deleteAddress= await userHelpers.deleteAddress(addressId,userId)
-   
       res.redirect('/user-profile')
 
+    } catch (error) {
+      next(error)
+    }
 
   },
 
 
-  post_updatePassword:async(req,res)=>{
-    userId =req.session.user._id
-   
-    console.log(req.body);
-    let userPassword = await userHelpers.updateUserPassword(userId,req.body)
 
-    res.redirect('/user-profile')
+  post_updateName: async (req, res,next) => {
+    try {
+      userId = req.session.user._id
 
-  },
+      let userName = await userHelpers.updateUsername(userId, req.body)
 
+      res.redirect('/user-profile')
 
-  // get_editAddress:(req,res)=>{
-
-  //   addressId=req.params.id
-  //   res.redirect('/user-profile')
-
-  // },
-
-
-  post_editAddress: async (req, res) => {
-    userId =req.session.user._id
-    addressId=req.params.id
-    console.log(req.body);
-  console.log(addressId);
-  
-    let editAddress = await userHelpers.editAddress(userId,req.body,addressId)
-
-    res.redirect('/user-profile')
+    } catch (error) {
+      next(error)
+    }
 
 
   },
 
-  // get_placeAddress:(req, res) => {
-  
-  //   userId =req.session.user._id
-  //   let addressId = req.params.id
-  
-  //   let selectAddress=userHelpers.placeAddress(addressId,userId)
-
-  //   res.render('user/place-order',{selectAddress})
 
 
-  // }
+  delete_address: async (req, res,next) => {
+    try {
+      userId = req.session.user._id
+      addressId = req.params.id
+      console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+
+
+      let deleteAddress = await userHelpers.deleteAddress(addressId, userId)
+
+      res.redirect('/user-profile')
+
+    } catch (error) {
+      next(error)
+    }
+
+  },
 
 
 
- 
+  post_updatePassword: async (req, res,next) => {
+    try {
+      userId = req.session.user._id
+
+
+      let userPassword = await userHelpers.updateUserPassword(userId, req.body)
+
+      res.redirect('/user-profile')
+
+    } catch (error) {
+      next(error)
+
+    }
+
+
+  },
+
+
+
+
+
+  post_editAddress: async (req, res,next) => {
+    try {
+      userId = req.session.user._id
+      addressId = req.params.id
+
+      console.log(addressId);
+
+      let editAddress = await userHelpers.editAddress(userId, req.body, addressId)
+
+      res.redirect('/user-profile')
+
+    } catch (error) {
+      next(error)
+    }
+
+
+
+  },
+
+
+
+
+  post_verifyPayment: (req, res,next) => {
+    try {
+      console.log(req.body);
+      razorpayHelpers.verifyPayment(req.body).then(() => {
+        razorpayHelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {
+          console.log('Payment successful');
+          res.json({ status: true })
+        })
+      }).catch((err) => {
+        console.log(err);
+        res.json({ status: false, errMsg: ' ' })
+
+      });
+
+    } catch (error) {
+      next(error)
+    }
+
+  },
+
+
+
+
+  item_cancelled: async (req, res,next) => {
+    try {
+      orderId = req.params.id
+      console.log('cancelled');
+      console.log(orderId);
+      itemCancelled = orderHelpers.changeStatusCancelled(orderId)
+      res.redirect('/order-list')
+
+    } catch (error) {
+      next(error)
+    }
+
+  },
+
+
+
+
+
+  post_applyCoupon: (req, res,next) => {
+    try {
+      console.log('aplyyyyyyyyyyyyyyyyyyyyy');
+      console.log(req.body, 'reqqqqqqqqqqqqqqqqqqqqqqqq bodyyyyyyyyyyyyyyyyyyyyyyyy');
+
+      couponHelpers.getAllCoupon(req.body).then((response) => {
+        console.log(response, 'cpoupon vanuuuuuuuuuuuuuuu');
+        if (response.coupon) {
+          req.session.coupon = response
+          let addUser = couponHelpers.addUser(req.body)
+        }
+
+        res.json(response)
+
+
+
+      })
+
+    } catch (error) {
+      next(error)
+    }
+
+
+  }
+
+
+
 
 
 }

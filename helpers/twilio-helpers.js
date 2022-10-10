@@ -13,25 +13,32 @@ const client = require('twilio')(accountSid, authToken,ServiceSID);
 module.exports = {
 
     doSms: (userData) => {
-
         return new Promise(async (resolve, reject) => {
-            let res = {}
-            console.log(userData);
-            console.log('eeeeeeeeeeeeeeee');
-            await client.verify.services( ServiceSID).verifications.create({
+        try {
+           
+                let res = {}
+                console.log(userData);
+                console.log('eeeeeeeeeeeeeeee');
+                await client.verify.services( ServiceSID).verifications.create({
+    
+                    to: `+91${userData.phone}`,
+                    channel: "sms"
+                }).then((reeee) => {
+                    res.valid = true;
+                    resolve(res)
+                    console.log(reeee);
+                }).catch((err) => {
+    
+                    console.log(err);
+    
+                })
+        
+            
+        } catch (error) {
+            reject(error)
+        }
 
-                to: `+91${userData.phone}`,
-                channel: "sms"
-            }).then((reeee) => {
-                res.valid = true;
-                resolve(res)
-                console.log(reeee);
-            }).catch((err) => {
-
-                console.log(err);
-
-            })
-        })
+    })
     },
 
     otpVerify: (otpData, userData) => {
@@ -40,14 +47,22 @@ module.exports = {
 
 
         return new Promise(async (resolve, reject) => {
-            await client.verify.services( ServiceSID).verificationChecks.create({
-                to: `+91${userData.phone}`,
-                code: otpData.otp
-            }).then((verifications) => {
-                console.log(verifications);
-                resolve(verifications.valid)
-            })
-        })
+        try {
+           
+                await client.verify.services( ServiceSID).verificationChecks.create({
+                    to: `+91${userData.phone}`,
+                    code: otpData.otp
+                }).then((verifications) => {
+                    console.log(verifications);
+                    resolve(verifications.valid)
+                })
+          
+            
+        } catch (error) {
+            reject(error)
+        }
+    })
+      
     }
 
 

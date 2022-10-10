@@ -8,42 +8,59 @@ let objectId = require('mongodb').ObjectId
 module.exports = {
   insertCategory: (proDetails) => {
     return new Promise((resolve, reject) => {
-      db.get().collection('cat').insertOne(proDetails).then((data) => {
-        console.log(data);
-        resolve(data)
+    try {
+     
+        db.get().collection('cat').insertOne(proDetails).then((data) => {
+          console.log(data);
+          resolve(data)
 
-      })
-    })
+        })
+  
+
+    } catch (error) {
+      reject(error)
+    }
+
+  })
 
   },
 
   viewCategory: () => {
     return new Promise(async (resolve, reject) => {
-      let category = await db.get().collection('cat').find().toArray()
-      
-    
-      resolve(category)
+    try {
+     
+        let category = await db.get().collection('cat').find().toArray()
 
-    })
+
+        resolve(category)
+
+    
+
+    } catch (error) {
+      reject(error)
+    }
+  })
+
   },
 
   deleteCategory: (catDetails) => {
     return new Promise((resolve, reject) => {
+    try {
+      
 
-      db.get().collection('cat').deleteOne({ _id: objectId(catDetails) }).then((response) => {
-        resolve(response)
+        db.get().collection('cat').deleteOne({ _id: objectId(catDetails) }).then((response) => {
+          resolve(response)
 
-      })
-    })
+        })
+    
+
+    } catch (error) {
+      reject(error)
+    }
+  })
 
   },
-  // getCategoryDetails:(catId)=>{
-  //   return new Promise((resolve,reject)=>{
-  //    db.get().collection('water').findOne({_id:objectId(proId)}).then((product)=>{
-  //     resolve(product)
-  //    })
-  //   })
-  // }
+ 
 
 
 }

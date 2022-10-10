@@ -1,0 +1,54 @@
+
+
+
+
+<div class="content">
+   <a href="/admin/add-banner" class="btn btn-success mt-3 ml-5">Add Banner</a>
+   
+<section>
+    <div class="container  d-flex justify-content-end"> 
+        <div class="float-right">
+            
+        </div>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th scope="col ">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Discription</th>
+     
+                    
+
+                    <th scope="col">Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each viewBanner}}
+                
+                <tr>
+                    <th scope="row">{{inc @index}}</th>
+                    <td>{{this.bName}} </td>
+                    <td>{{this.description}} </td>
+
+
+              
+                     
+
+
+                    
+                    
+         
+                    <td><img src="/product-images/{{this._id}}.png" style="width: 50px; height: 50px;"></td>
+               
+
+                     <td><a href="/admin/delete-banner/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you sure want to delete {{this.Name}} ?')">Delete</a></td>
+                      
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+</div>
