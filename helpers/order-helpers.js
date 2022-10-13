@@ -8,9 +8,15 @@ let objectId = require('mongodb').ObjectId
 
 
 module.exports = {
-    placeOrder: (order, products, total,Couponname,userId,GrandTotal,discount) => {
+    placeOrder: (order, products, total,userId,discount,Couponname) => {
         console.log('haiiiii');
-        console.log(userId,GrandTotal,discount);
+        console.log(userId,discount);
+        let GrandTotal =total
+        if(Couponname){
+             GrandTotal =total - discount
+
+        }
+        
         return new Promise(async(resolve, reject) => {
 
             try {

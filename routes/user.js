@@ -18,7 +18,7 @@ const verifyLogin =(req,res,next)=>{
 /* GET home page. */
 
 
-router.get('/',verifyLogin, userContollers.user_home );
+router.get('/', userContollers.user_home );
 
 
 

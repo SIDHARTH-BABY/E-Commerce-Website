@@ -39,10 +39,10 @@ module.exports = {
 
         // let totalDeliveredCanceled = await dashboardHelpers.totalDeliveredCanceled()
 
-        console.log(monthamount, 'monthamount is hereeeeeeeeeeeeeeeeeeeee');
+      
         res.render('admin/admin-home', { layout: 'admin-layout', admin: true, adminw, userCount, orderCount, codCount, ONLINECount, totalDelivered, totalShipped, cancelled, monthamount })
       } else {
-        res.redirect('/admin/login',)
+        res.redirect('/admin/login')
       }
 
     } catch (error) {
@@ -101,9 +101,16 @@ module.exports = {
 
   admin_userManage: (req, res,next) => {
     try {
-      userHelpers.getAllUsers().then((userdetails) => {
-        res.render('admin/user-manage', { layout: 'admin-layout', admin: true, userdetails });
-      })
+      if (req.session.adminloggedIn) {
+        userHelpers.getAllUsers().then((userdetails) => {
+          res.render('admin/user-manage', { layout: 'admin-layout', admin: true, userdetails });
+        })
+
+      }else{
+          res.redirect('/admin/login')
+
+      }
+     
 
     } catch (error) {
       next(error)

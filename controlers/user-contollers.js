@@ -457,6 +457,8 @@ module.exports = {
   post_placeOrder: async (req, res, next) => {
     try {
 
+      if(req.session.coupon){
+        
       // let couponName =req.body.Couponname
       let user = await userHelpers.getUserDetails(req.session.user._id)
 
@@ -472,22 +474,60 @@ module.exports = {
 
       let discount = CoupDetails.price
       
-      let GrandTotal = totalPrice - discount
+      
 
 
      
-      orderHelpers.placeOrder(order, products, totalPrice, Couponname, req.session.user._id, GrandTotal, discount).then(async (orderId) => {
+      orderHelpers.placeOrder(order, products, totalPrice, req.session.user._id, discount,Couponname).then(async (orderId) => {
 
 
         if (req.body['payment-method'] === 'COD') {
           res.json({ codSuccess: true })
         } else {
+          let GrandTotal =totalPrice - discount
           razorpayHelpers.generateRazorpay(orderId, GrandTotal).then((response) => {
             res.json(response)
           })
         }
 
       })
+
+      }else{
+        
+     
+      let user = await userHelpers.getUserDetails(req.session.user._id)
+
+      let order = req.body
+
+     
+
+      let products = await cartHelpers.getCartProductList(req.body.userId)
+
+      let totalPrice = await cartHelpers.getTotalAmount(req.body.userId)
+
+      
+      
+       
+
+      let GrandTotal = totalPrice
+     
+      orderHelpers.placeOrder(order, products, totalPrice, req.session.user._id).then(async (orderId) => {
+
+        
+        if (req.body['payment-method'] === 'COD') {
+          res.json({ codSuccess: true })
+        } else {
+           GrandTotal = totalPrice
+
+          razorpayHelpers.generateRazorpay(orderId, GrandTotal).then((response) => {
+            res.json(response)
+          })
+        }
+
+      })
+
+      }
+
 
 
     } catch (error) {
