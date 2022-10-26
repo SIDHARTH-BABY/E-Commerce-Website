@@ -298,10 +298,6 @@ module.exports = {
         try {
 
 
-        
-
-          
-
                 userPassword.PasswordOne = await bcrypt.hash(userPassword.PasswordOne, 10);
 
                 db.get().collection(collections.USER_collection).updateOne({ _id: objectId(userId) }, { $set: { Password: userPassword.PasswordOne } }).then((data) => {
@@ -342,7 +338,6 @@ module.exports = {
                             "Addresses.$. District": address.District,
                             "Addresses.$.Country": address.Country,
                             "Addresses.$.State": address.State
-
                         }
                     }
                 ).then((response) => {

@@ -424,23 +424,20 @@ module.exports = {
   placeOrder: async (req, res, next) => {
     try {
 
-
       let viewCoupon = await couponHelpers.viewCoupon()
+
       let userId = req.session.user._id
+
       let user = req.session.user
 
       let addressId = req.query.id
 
-
-
       let selectAddress = await userHelpers.placeAddress(addressId, userId)
-
-
 
       let userAddress = await userHelpers.userAddress(userId)
 
-
       let total = await cartHelpers.getTotalAmount(req.session.user._id)
+
       res.render('user/place-order', { total, user, layout: 'user-layout', userq: true, userAddress, selectAddress, viewCoupon })
 
     } catch (error) {

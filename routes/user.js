@@ -24,10 +24,10 @@ router.get('/', userContollers.user_home );
 
 
 
-router.get('/category-product',verifyLogin,userContollers.category_product)
+router.get('/category-product',userContollers.category_product)
 
 
-router.get('/user-menu',verifyLogin,userContollers.user_menu)
+router.get('/user-menu',userContollers.user_menu)
 
 
 router.get('/single-product/:id',userContollers.single_product)
