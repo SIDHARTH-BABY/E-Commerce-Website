@@ -139,6 +139,7 @@ module.exports = {
         res.render('user/single-product', { layout: 'user-layout', userq: true, products, user, cartCount })
 
       } else {
+        let product = req.params.id
         let products = await productHelpers.getProductDetails(product)
 
 
